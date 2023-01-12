@@ -1,37 +1,39 @@
 package models;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Saude {
-	private List<Vacina> vacinas;
-	private List<Remedio> remedios;
+	private ArrayList<Vacina> vacinas;
+	private ArrayList<Remedio> remedios;
 	
 	
-	public Saude(List<Vacina> vacinas, List<Remedio> remedios) {
+	public Saude(ArrayList<Vacina> vacinas, ArrayList<Remedio> remedios) {
 		super();
 		this.vacinas = vacinas;
 		this.remedios = remedios;
 	}
 	
-	public List<Vacina> getVacinas() {
+	public ArrayList<Vacina> getVacinas() {
 		return vacinas;
 	}
-	public void setVacinas(List<Vacina> vacinas) {
+	public void setVacinas(ArrayList<Vacina> vacinas) {
 		this.vacinas = vacinas;
 	}
-	public List<Remedio> getRemedios() {
+	public ArrayList<Remedio> getRemedios() {
 		return remedios;
 	}
-	public void setRemedios(List<Remedio> remedios) {
+	public void setRemedios(ArrayList<Remedio> remedios) {
 		this.remedios = remedios;
 	}
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Vacinas: " + vacinas + "\n");
-		sb.append("Remédios: " + remedios + "\n");
+		sb.append("\n Vacinas: \n" + vacinas);
+		sb.append("\n");
+		sb.append("Remédios: \n" + remedios + "\n");
 		
 		return sb.toString();
 	}
 	
 }
+

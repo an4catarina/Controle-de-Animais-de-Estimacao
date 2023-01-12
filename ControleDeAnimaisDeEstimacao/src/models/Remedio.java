@@ -43,13 +43,12 @@ public class Remedio extends Medicamento {
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Remédio: \n");
-		sb.append("Nome: " + getNomeMedicamento() + "\n");
+		sb.append("Nome remédio:  " + getNomeMedicamento() + "\n");
 		sb.append("Data: " + getData() + "\n");
 		sb.append("Dosagem: " + dosagem + "\n");
 		sb.append("Frequencia: " + frequencia + "\n");
 		sb.append("Horario: " + horario + "\n");
-		sb.append("Em um período de " + getPeriodo() + getIntervalo() + "\n");
+		sb.append("Em um período de " + getPeriodo() + " " + getIntervalo() + "\n");
 		
 		return sb.toString();
 	}

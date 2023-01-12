@@ -42,7 +42,8 @@ public class Vacina extends Medicamento {
 		sb.append("Lote: " + lote + "\n");
 		sb.append("Laboratório: " + laboratorio + "\n");
 		sb.append("Necessário revacinar? " + necRevacinar + "\n");
-		sb.append("Em um período de " + getPeriodo() + getIntervalo() + "\n");
+		sb.append("Em um período de " + getPeriodo() + " " + getIntervalo());
+		sb.append("\n");
 		
 		return sb.toString();
 	}

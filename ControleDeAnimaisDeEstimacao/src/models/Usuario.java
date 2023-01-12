@@ -1,24 +1,16 @@
 package models;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Usuario {
-	private String id;
 	private String nome;
-	private List<Animal> animais;
+	private ArrayList<Animal> animais;
 	
-	public Usuario(String id, String nome) {
-		this.id = id;
+	public Usuario(String nome, ArrayList<Animal> animais) {
 		this.nome = nome;
+		this.animais = animais;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
@@ -28,18 +20,17 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public List<Animal> getAnimais() {
+	public ArrayList<Animal> getAnimais() {
 		return animais;
 	}
 
-	public void setAnimais(List<Animal> animais) {
-		this.animais = animais;
+	public void setAnimais(ArrayList<Animal> animais2) {
+		this.animais = animais2;
 	}
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Usuário: \n");
-		sb.append("Id: " + id + "\n");
 		sb.append("Nome: "+ nome + "\n");
 		sb.append("Animais: " + animais);
 		
