@@ -2,7 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -20,11 +19,12 @@ import javax.swing.JPanel;
 public class TelaPrincipal implements ActionListener {
 	private static JFrame frame;
 	
-	public TelaPrincipal() {
+	TelaPrincipal() {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(1100, 700);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
 		implementarTemplate();
@@ -42,7 +42,6 @@ public class TelaPrincipal implements ActionListener {
 			label.setIcon(icon);
 			frame.getContentPane().add(label, BorderLayout.CENTER);
 			frame.setContentPane(label);
-			frame.setLocationRelativeTo(null);
 			frame.pack();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -53,7 +52,7 @@ public class TelaPrincipal implements ActionListener {
 	public void painelPets() {
 		JPanel painel = new JPanel();
 		painel.setBounds(25, 150, 1050, 490);
-		painel.setBackground(Color.cyan);
+		painel.setBackground(new Color(211, 211, 211));
 		painel.setLayout(new BorderLayout());
 		frame.add(painel);
 	}
@@ -75,6 +74,10 @@ public class TelaPrincipal implements ActionListener {
 		botao.setBounds(980, 650, 100, 40);
 		frame.add(botao);
 
+	}
+	
+	public static void main(String[] args) {
+		new TelaPrincipal();
 	}
 
 	@Override
