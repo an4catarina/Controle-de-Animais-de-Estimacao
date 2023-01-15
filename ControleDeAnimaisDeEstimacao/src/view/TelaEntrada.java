@@ -13,15 +13,17 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+
 
 public class TelaEntrada implements ActionListener {
-	JFrame frame = new JFrame("My Pet Care");
+	private static JFrame frame;
 		
-	public TelaEntrada(){
+	TelaEntrada(){
+		frame = new JFrame("My Pet Care");
 		frame.setSize(1100, 700);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
 		implementarTemplate();
@@ -38,8 +40,8 @@ public class TelaEntrada implements ActionListener {
 			label.setIcon(icon);
 			frame.getContentPane().add(label, BorderLayout.CENTER);
 			frame.setContentPane(label);
-			frame.setLocationRelativeTo(null);
 			frame.pack();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -47,7 +49,6 @@ public class TelaEntrada implements ActionListener {
 	}
 	
 	public void implementarCaixaDeTexto() {
-		
 		JTextField caixaDeTexto = new JTextField("escreva seu nome");
 		caixaDeTexto.setBounds(430, 520, 250, 40);
 		frame.add(caixaDeTexto);
@@ -61,6 +62,7 @@ public class TelaEntrada implements ActionListener {
 	}
 
 	public void main(String[] args) {
+		new TelaEntrada();
 	}
 
 	@Override
