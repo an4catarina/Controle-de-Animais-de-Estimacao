@@ -18,10 +18,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class TelaPrincipal implements ActionListener {
+public class TelaCriarVacina implements ActionListener {
 	private static JFrame frame;
+	private static JPanel painel;
 	
-	TelaPrincipal() {
+	TelaCriarVacina() {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -30,10 +31,8 @@ public class TelaPrincipal implements ActionListener {
 		frame.setVisible(true);
 		
 		implementarTemplate();
-		painelPets();
-		botaoAdicaoTutor();
-		textoPet();
-		botaoVerpet();
+		painelVacina();
+		botaoVoltar();
 	}
 	public void implementarTemplate() {
 		
@@ -52,59 +51,65 @@ public class TelaPrincipal implements ActionListener {
 		}
 	}
 	
-	public void painelPets() {
-		JPanel painel = new JPanel();
-		Border blackline = BorderFactory.createLineBorder(Color.black);
-		painel.setBounds(25, 170, 550, 480);
-		painel.setBackground(new Color(211, 211, 211));
-		painel.setBorder(blackline);
-		painel.setLayout(new BorderLayout());
-		frame.add(painel);
-	}
 	
-	public void listaTutores() {
-		
-	}
-	
-	public void textoPet() {
-		JLabel meusPets = new JLabel("Tutores");
-		meusPets.setBounds(300, 15, 250, 150);
-		meusPets.setFont(new Font("", Font.BOLD, 30));
-		meusPets.setForeground(Color.BLACK);
-		frame.add(meusPets);
-	}
-
-	public void botaoAdicaoTutor() {
-		JButton botao = new JButton("Adicionar tutor");
-		botao.setBounds(456, 655, 120, 40);
-		botao.setActionCommand("adicionartutor");
-		botao.addActionListener(this);
-		frame.add(botao);
-
-	}
-	
-	public static void main(String[] args) {
-		new TelaPrincipal();
-	}
-	
-	public void botaoVerpet() { //PROVISÓRIO TEM QUE TIRAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		JButton botao = new JButton("Ver tutor");
-		botao.setActionCommand("verpet");
+	public void botaoVoltar() {
+		JButton botao = new JButton("Voltar");
+		botao.setActionCommand("voltar");
 		botao.addActionListener(this);
 		botao.setBounds(500, 12, 70, 30);
 		frame.add(botao);	
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if ("adicionartutor" == e.getActionCommand()) {
-			 new TelaCriarTutor();
-	         frame.dispose();
-	} else if ("verpet" == e.getActionCommand()) {
-		 new TelaPerfilTutor();
-         frame.dispose();
-}
+	public void painelVacina() {
+		painel = new JPanel();
+		Border blackline = BorderFactory.createLineBorder(Color.black);
+		painel.setBounds(25, 170, 550, 480);
+		painel.setBackground(new Color(211, 211, 211));
+		painel.setBorder(blackline);
+		painel.setLayout(null);
+		frame.add(painel);
+		construirVacinas();
+	}
+	
+	public void construirVacinas() {
+		labelEditarVacina();
+		botaoConfirmar();
+	}
+	
+	public void labelEditarVacina() {
+		JLabel editarVacina = new JLabel("Adicionar vacina");
+		editarVacina.setBounds(140, 45, 300, 40);
+		editarVacina.setFont(new Font("", Font.BOLD, 30));
+		editarVacina.setForeground(Color.BLACK);
+		painel.add(editarVacina);
+	}
+	
+	public void botaoConfirmar() {
+		JButton botao = new JButton("Confirmar");
+		botao.setBounds(230, 400, 100, 40);
+		botao.setActionCommand("Confirmar");
+		botao.addActionListener(this);
+		painel.add(botao);
 		
 	}
+	
+	
+	public static void main(String[] args) {
+		new TelaCriarVacina();
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if ("voltar" == e.getActionCommand()) {
+			 new TelaPerfilAnimal();
+	         frame.dispose();
+		}
+		else if ("Confirmar" == e.getActionCommand()) {
+			 new TelaPerfilAnimal();
+	         frame.dispose();
+		}
+		
+	}
 }
+

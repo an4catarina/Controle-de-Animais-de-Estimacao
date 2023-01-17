@@ -12,15 +12,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 
-public class TelaEntrada implements ActionListener {
+public class TelaInicio implements ActionListener {
 	private static JFrame frame;
 		
-	TelaEntrada(){
+	TelaInicio(){
 		frame = new JFrame("My Pet Care");
-		frame.setSize(1100, 700);
+		frame.setSize(600, 700);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -28,13 +27,12 @@ public class TelaEntrada implements ActionListener {
 		
 		implementarTemplate();
 		implementarBotao();
-		implementarCaixaDeTexto();
 	}
 	
 	public void implementarTemplate() {
 		try {
-			BufferedImage img = ImageIO.read(getClass().getResource("/imagens/fundodetelaentrada.jpg"));
-			Image dimg = img.getScaledInstance(1100, 700, Image.SCALE_SMOOTH);
+			BufferedImage img = ImageIO.read(getClass().getResource("/imagens/telaentrada.jpg"));
+			Image dimg = img.getScaledInstance(600, 700, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(dimg);
 			JLabel label = new JLabel();
 			label.setIcon(icon);
@@ -47,27 +45,27 @@ public class TelaEntrada implements ActionListener {
 			System.exit(1);
 		}
 	}
-	
-	public void implementarCaixaDeTexto() {
-		JTextField caixaDeTexto = new JTextField("escreva seu nome");
-		caixaDeTexto.setBounds(430, 520, 250, 40);
-		frame.add(caixaDeTexto);
-	}
+
 
 	public void implementarBotao() {
-		JButton botao = new JButton("Confirmar");
-		botao.setBounds(500, 570, 100, 40);
+		JButton botao = new JButton("Começar");
+		botao.setBounds(270, 500, 100, 40);
+		botao.setActionCommand("começar");
+		botao.addActionListener(this);
 		frame.add(botao);
 		
 	}
 
 	public static void main(String[] args) {
-		new TelaEntrada();
+		new TelaInicio();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if ("começar" == e.getActionCommand()) {
+			 new TelaPrincipal();
+	         frame.dispose();
+	}
 		
 	}
 }
