@@ -187,11 +187,11 @@ public class TelaEditarPet implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaPerfilAnimal();
+			 new TelaPerfilPet();
 	         frame.dispose();
 		}
 		else if ("Confirmar" == e.getActionCommand()) {
-			 new TelaPerfilAnimal();
+			 new TelaPerfilPet();
 	         frame.dispose();
 		}
 		

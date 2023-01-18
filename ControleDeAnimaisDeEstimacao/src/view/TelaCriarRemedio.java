@@ -194,11 +194,11 @@ public class TelaCriarRemedio implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaPerfilAnimal();
+			 new TelaPerfilPet();
 	         frame.dispose();
 		}
 		if ("Confirmar" == e.getActionCommand()) {
-			 new TelaPerfilAnimal();
+			 new TelaPerfilPet();
 	         frame.dispose();
 		} 
 		if (sim.isSelected() == true) {

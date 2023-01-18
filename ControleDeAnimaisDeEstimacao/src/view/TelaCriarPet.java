@@ -20,11 +20,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class TelaCriarAnimal implements ActionListener {
+public class TelaCriarPet implements ActionListener {
 	private static JFrame frame;
 	private static JPanel painel;
 	
-	TelaCriarAnimal() {
+	TelaCriarPet() {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -60,7 +60,6 @@ public class TelaCriarAnimal implements ActionListener {
 		botao.addActionListener(this);
 		botao.setBounds(500, 12, 70, 30);
 		frame.add(botao);
-		
 	}
 	
 	public void painelPets() {
@@ -181,7 +180,7 @@ public class TelaCriarAnimal implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		new TelaCriarAnimal();
+		new TelaCriarPet();
 
 	}
 

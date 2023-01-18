@@ -14,10 +14,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
-public class TelaInicio implements ActionListener {
+public class Inicio implements ActionListener {
 	private static JFrame frame;
 		
-	TelaInicio(){
+	Inicio(){
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -57,13 +57,13 @@ public class TelaInicio implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		new TelaInicio();
+		new Inicio();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("começar" == e.getActionCommand()) {
-			 new TelaPrincipal();
+			 new TelaListaTutores();
 	         frame.dispose();
 	}
 		

@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,16 +15,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class TelaPerfilAnimal implements ActionListener {
+public class TelaPerfilPet implements ActionListener {
 	JFrame frame = new JFrame();
 	private static JPanel painelPet;
 	private static JPanel painelVacinas;
 	private static JPanel painelRemedios;
 
-	TelaPerfilAnimal() {
+	TelaPerfilPet() {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -76,6 +78,15 @@ public class TelaPerfilAnimal implements ActionListener {
 	
 	public void implementarElementosPet() {
 		botaoEditarPet();
+		texto();
+	}
+	
+	public void texto() {
+		JLabel pet = new JLabel("Pet");
+		pet.setBounds(20, 13, 250, 20);
+		pet.setFont(new Font("", Font.BOLD, 25));
+		pet.setForeground(Color.BLACK);
+		painelPet.add(pet);
 	}
 	
 	public void botaoEditarPet() {
@@ -99,16 +110,49 @@ public class TelaPerfilAnimal implements ActionListener {
 	}
 	
 	public void implementarElementosVacinas() {
+		textoVacinas();
 		botaoCriarVacina();
+		botaoVerVacina();
+		botaoExcluirVacina();
+		listaVacinas();
+	}
+	
+	public void textoVacinas() {
+		JLabel vacinas = new JLabel("Vacinas");
+		vacinas.setBounds(10, 13, 150, 20);
+		vacinas.setFont(new Font("", Font.BOLD, 15));
+		vacinas.setForeground(Color.BLACK);
+		painelVacinas.add(vacinas);
+	}
+	
+	public void botaoVerVacina() {
+		JButton botao = new JButton("Ver");
+		botao.setActionCommand("verTutor");
+		botao.addActionListener(this);
+		botao.setBounds(80, 11, 70, 30);
+		botao.setActionCommand("verVacina");
+		botao.addActionListener(this);
+		painelVacinas.add(botao);	
 	}
 	
 	public void botaoCriarVacina() {
-		JButton botaoCriarVacina = new JButton("Adicionar");
+		JButton botaoCriarVacina = new JButton("Criar");
 		botaoCriarVacina.setActionCommand("criarVacina");
 		botaoCriarVacina.addActionListener(this);
-		botaoCriarVacina.setBounds(170, 12, 95, 30);
+		botaoCriarVacina.setBounds(140, 11, 70, 30);
 		painelVacinas.add(botaoCriarVacina);
-		
+	}
+
+	public void botaoExcluirVacina() {
+		JButton botao = new JButton("Excluir");
+		botao.setBounds(200, 11, 70, 30);
+		painelVacinas.add(botao);	
+	}
+	
+	public void listaVacinas() {
+		JList vacinas = new JList();
+		vacinas.setBounds(10, 50, 250, 170);
+		painelVacinas.add(vacinas);
 	}
 	
 	public void painelRemedios() {
@@ -124,26 +168,60 @@ public class TelaPerfilAnimal implements ActionListener {
 	
 	public void implementarElementosRemedios() {
 		botaoCriarRemedio();
+		textoRemedios();
+		botaoVerRemedio();
+		botaoExcluirRemedio();
+		listaRemedios();
+	}
+	
+	public void textoRemedios() {
+		JLabel remedios = new JLabel("Remedios");
+		remedios.setBounds(10, 13, 150, 20);
+		remedios.setFont(new Font("", Font.BOLD, 15));
+		remedios.setForeground(Color.BLACK);
+		painelRemedios.add(remedios);
+	}
+	
+	public void botaoVerRemedio() {
+		JButton botao = new JButton("Ver");
+		botao.setActionCommand("verTutor");
+		botao.addActionListener(this);
+		botao.setBounds(80, 11, 70, 30);
+		botao.setActionCommand("verRemedio");
+		botao.addActionListener(this);
+		painelRemedios.add(botao);	
 	}
 	
 	public void botaoCriarRemedio() {
-		JButton botaoCriarRemedio = new JButton("Adicionar");
+		JButton botaoCriarRemedio = new JButton("Criar");
 		botaoCriarRemedio.setActionCommand("criarRemedio");
 		botaoCriarRemedio.addActionListener(this);
-		botaoCriarRemedio.setBounds(170, 12, 95, 30);
+		botaoCriarRemedio.setBounds(140, 11, 70, 30);
 		painelRemedios.add(botaoCriarRemedio);
 		
 	}
+
+	public void botaoExcluirRemedio() {
+		JButton botao = new JButton("Excluir");
+		botao.setBounds(200, 11, 70, 30);
+		painelRemedios.add(botao);	
+	}
+	
+	public void listaRemedios() {
+		JList remedios = new JList();
+		remedios.setBounds(10, 50, 250, 170);
+		painelRemedios.add(remedios);
+	}
 	
 	public static void main(String[] args) {
-		new TelaPerfilAnimal();
+		new TelaPerfilPet();
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaPrincipal();
+			 new TelaPerfilTutor();
 	         frame.dispose();
 		} else if ("editarPet" == e.getActionCommand()) {
 			 new TelaEditarPet();
@@ -154,7 +232,13 @@ public class TelaPerfilAnimal implements ActionListener {
 		} else if ("criarRemedio" == e.getActionCommand()) {
 			 new TelaCriarRemedio();
 	         frame.dispose();
-		}
+		} else if ("verRemedio" == e.getActionCommand()) {
+			 new TelaRemedio();
+	         frame.dispose();
+		} else if ("verVacina" == e.getActionCommand()) {
+			 new TelaVacina();
+	         frame.dispose();
+		} 
 		
 	}
 

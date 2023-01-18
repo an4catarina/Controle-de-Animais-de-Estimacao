@@ -146,10 +146,10 @@ public class TelaCriarTutor implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaPrincipal();
+			 new TelaListaTutores();
 	         frame.dispose();
 		} else if ("Confirmar" == e.getActionCommand()) {
-			 new TelaPrincipal();
+			 new TelaListaTutores();
 	         frame.dispose();
 		}
 		

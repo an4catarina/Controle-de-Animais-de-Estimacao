@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +15,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 
 public class TelaPerfilTutor implements ActionListener {
@@ -74,6 +77,15 @@ public class TelaPerfilTutor implements ActionListener {
 	
 	public void implementarElementosTutor() {
 		botaoEditarTutor();
+		textoTutor();
+	}
+	
+	public void textoTutor() {
+		JLabel tutor = new JLabel("Tutor");
+		tutor.setBounds(20, 13, 250, 20);
+		tutor.setFont(new Font("", Font.BOLD, 25));
+		tutor.setForeground(Color.BLACK);
+		painelTutor.add(tutor);
 	}
 	
 	public void botaoEditarTutor() {
@@ -98,15 +110,49 @@ public class TelaPerfilTutor implements ActionListener {
 	
 	public void implementarElementosPet() {
 		botaoAdicionarPet();
+		listaPets();
+		texto();
+		botaoVerPet();
+		botaoAdicionarPet();
+		botaoExcluirPet();
 	}
 	
+	public void listaPets() {
+		JList listaPet = new JList();
+		listaPet.setBounds(10, 50, 530, 190);
+		listaPet.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		painelPet.add(listaPet);
+	}
+	
+	public void texto() {
+		JLabel pet = new JLabel("Pets");
+		pet.setBounds(20, 13, 250, 20);
+		pet.setFont(new Font("", Font.BOLD, 25));
+		pet.setForeground(Color.BLACK);
+		painelPet.add(pet);
+	}
+	
+	public void botaoVerPet() {
+		JButton botao = new JButton("Ver pet");
+		botao.setActionCommand("verPet");
+		botao.addActionListener(this);
+		botao.setBounds(195, 13, 100, 30);
+		painelPet.add(botao);	
+	}
+
 	public void botaoAdicionarPet() {
 		JButton botaoEditarPet = new JButton("Adicionar pet");
+		botaoEditarPet.setBounds(295, 13, 130, 30);
 		botaoEditarPet.setActionCommand("adicionarPet");
 		botaoEditarPet.addActionListener(this);
-		botaoEditarPet.setBounds(430, 12, 108, 30);
 		painelPet.add(botaoEditarPet);
 		
+	}
+	
+	public void botaoExcluirPet() {
+		JButton botao = new JButton("Excluir pet");
+		botao.setBounds(425, 13, 120, 30);
+		painelPet.add(botao);	
 	}
 	
 	public static void main(String[] args) {
@@ -116,14 +162,17 @@ public class TelaPerfilTutor implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaPrincipal();
+			 new TelaListaTutores();
 	         frame.dispose();
 		} else if ("adicionarPet" == e.getActionCommand()) {
-			 new TelaCriarAnimal();
+			 new TelaCriarPet();
 	         frame.dispose();
 		} else if ("editarTutor" == e.getActionCommand()) {
 			 new TelaEditarTutor();
 	         frame.dispose();
-		}
+		} else if ("verPet" == e.getActionCommand()) {
+			 new TelaPerfilPet();
+	         frame.dispose();
+		} 
 	}
 }
