@@ -11,18 +11,28 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 public class TelaCriarRemedio implements ActionListener {
 	private static JFrame frame;
 	private static JPanel painel;
+	private static JRadioButton sim;
+	private static JRadioButton nao;
+	JLabel tempode;
+	JTextField num;
+	JComboBox<String> boxIntervalo;
+	String[] intervalo = {"", "Dias", "Meses", "Anos"};
+	String[] dosagens = {"", "mg", "ml", "g", "comprimido(s)", "cápsula(s)", "gota(s)"};
+	
 	
 	TelaCriarRemedio() {
 		frame = new JFrame("My Pet Care");
@@ -33,7 +43,7 @@ public class TelaCriarRemedio implements ActionListener {
 		frame.setVisible(true);
 		
 		implementarTemplate();
-		painelRemedio();
+		painelVacina();
 		botaoVoltar();
 	}
 	public void implementarTemplate() {
@@ -62,7 +72,7 @@ public class TelaCriarRemedio implements ActionListener {
 		frame.add(botao);	
 	}
 	
-	public void painelRemedio() {
+	public void painelVacina() {
 		painel = new JPanel();
 		Border blackline = BorderFactory.createLineBorder(Color.black);
 		painel.setBounds(25, 170, 550, 480);
@@ -70,21 +80,101 @@ public class TelaCriarRemedio implements ActionListener {
 		painel.setBorder(blackline);
 		painel.setLayout(null);
 		frame.add(painel);
-		construirRemedios();
+		construirVacinas();
 	}
 	
-	public void construirRemedios() {
-		labelEditarRemedio();
+	public void construirVacinas() {
+		labelAdicionarRemedio();
+		nomeRemedio();
+		necRevacinar();
+		dosagem();
 		botaoConfirmar();
+		tempode();
 	}
 	
-	public void labelEditarRemedio() {
-		JLabel editarRemedio = new JLabel("Adicionar remédio");
-		editarRemedio.setBounds(120, 0, 400, 150);
-		editarRemedio.setFont(new Font("", Font.BOLD, 30));
-		editarRemedio.setForeground(Color.BLACK);
-		painel.add(editarRemedio);
+	
+	public void labelAdicionarRemedio() {
+		JLabel adicionarRemedio = new JLabel("Adicionar remédio");
+		adicionarRemedio.setBounds(150, 0, 280, 150);
+		adicionarRemedio.setFont(new Font("", Font.BOLD, 30));
+		adicionarRemedio.setForeground(Color.BLACK);
+		painel.add(adicionarRemedio);
 	}
+	
+	public void nomeRemedio() {
+		painel.setLayout(null);
+		JLabel nomeRemedio = new JLabel("Nome:");
+		nomeRemedio.setBounds(100, 110, 100, 40);
+		nomeRemedio.setFont(new Font("", 0, 18));
+		painel.add(nomeRemedio);
+		
+		JTextField textNome = new JTextField();
+		textNome.setBounds(220, 120, 200, 20);
+		painel.add(textNome);
+		
+	}
+
+	
+	public void dosagem() {
+		painel.setLayout(null);
+		JLabel dosagem = new JLabel("Dosagem:");
+		dosagem.setBounds(100, 230, 100, 40);
+		dosagem.setFont(new Font("", 0, 18));
+		painel.add(dosagem);
+		
+		JTextField textLote = new JTextField();
+		textLote.setBounds(220, 235, 55, 20);
+		painel.add(textLote);
+		
+		JComboBox boxDosagem = new JComboBox(dosagens);
+		boxDosagem.setBounds(275, 235, 145, 20);
+		painel.add(boxDosagem);
+	}
+	
+	
+	public void necRevacinar() {
+		painel.setLayout(null);
+		JLabel necRevacinar = new JLabel("É necessário revacinar?");
+		necRevacinar.setBounds(100, 270, 250, 40);
+		necRevacinar.setFont(new Font("", 0, 18));
+		painel.add(necRevacinar);
+		
+		sim = new JRadioButton("Sim");
+		nao = new JRadioButton("Não");
+		sim.setBounds(300, 278, 55, 20);
+		nao.setBounds(368, 278, 57, 20);
+		painel.add(sim);
+		painel.add(nao);
+		
+		sim.addActionListener(this);
+		nao.addActionListener(this);
+		
+		ButtonGroup opcoes = new ButtonGroup();
+		opcoes.add(nao);
+		opcoes.add(sim);
+	
+		
+	}
+	
+	public void tempode() {
+		tempode = new JLabel("Em um intervalo de:");
+		tempode.setBounds(100, 310, 250, 40);
+		tempode.setFont(new Font("", 0, 18));
+		tempode.setVisible(false);
+		painel.add(tempode);
+		
+	
+		num = new JTextField();
+		num.setBounds(280, 320, 60, 20);
+		num.setVisible(false);
+		painel.add(num);
+		
+		boxIntervalo = new JComboBox(intervalo);
+		boxIntervalo.setBounds(340, 320, 90, 20);
+		boxIntervalo.setVisible(false);
+		painel.add(boxIntervalo);
+	}
+	
 	
 	public void botaoConfirmar() {
 		JButton botao = new JButton("Confirmar");
@@ -97,7 +187,7 @@ public class TelaCriarRemedio implements ActionListener {
 	
 	
 	public static void main(String[] args) {
-		new TelaCriarRemedio();
+		new TelaCriarVacina();
 
 	}
 
@@ -107,11 +197,20 @@ public class TelaCriarRemedio implements ActionListener {
 			 new TelaPerfilAnimal();
 	         frame.dispose();
 		}
-		else if ("Confirmar" == e.getActionCommand()) {
+		if ("Confirmar" == e.getActionCommand()) {
 			 new TelaPerfilAnimal();
 	         frame.dispose();
+		} 
+		if (sim.isSelected() == true) {
+			tempode.setVisible(true);
+			num.setVisible(true);
+			boxIntervalo.setVisible(true);
 		}
+		if (sim.isSelected() == false) {
+			tempode.setVisible(false);
+			num.setVisible(false);
+			boxIntervalo.setVisible(false);
+		} 
 		
 	}
 }
-

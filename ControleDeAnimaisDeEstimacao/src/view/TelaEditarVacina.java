@@ -17,13 +17,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class TelaCriarVacina implements ActionListener {
+public class TelaEditarVacina implements ActionListener {
 	private static JFrame frame;
 	private static JPanel painel;
 	private static JRadioButton sim;
@@ -34,7 +33,7 @@ public class TelaCriarVacina implements ActionListener {
 	String[] intervalo = {"", "Dias", "Meses", "Anos"};
 	
 	
-	TelaCriarVacina() {
+	TelaEditarVacina() {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -67,7 +66,7 @@ public class TelaCriarVacina implements ActionListener {
 	public void botaoVoltar() {
 		JButton botao = new JButton("Voltar");
 		botao.setActionCommand("voltar");
-		botao.addActionListener(this);
+		botao.addActionListener((ActionListener) this);
 		botao.setBounds(500, 12, 70, 30);
 		frame.add(botao);	
 	}
@@ -84,7 +83,7 @@ public class TelaCriarVacina implements ActionListener {
 	}
 	
 	public void construirVacinas() {
-		labelAdicionarVacina();
+		labelEditarVacina();
 		nomeVacina();
 		dataVacina();
 		laboratorio();
@@ -95,12 +94,12 @@ public class TelaCriarVacina implements ActionListener {
 	}
 	
 	
-	public void labelAdicionarVacina() {
-		JLabel adicionarVacina = new JLabel("Adicionar vacina");
-		adicionarVacina.setBounds(150, 0, 280, 150);
-		adicionarVacina.setFont(new Font("", Font.BOLD, 30));
-		adicionarVacina.setForeground(Color.BLACK);
-		painel.add(adicionarVacina);
+	public void labelEditarVacina() {
+		JLabel editarVacina = new JLabel("Editar vacina");
+		editarVacina.setBounds(150, 0, 280, 150);
+		editarVacina.setFont(new Font("", Font.BOLD, 30));
+		editarVacina.setForeground(Color.BLACK);
+		painel.add(editarVacina);
 	}
 	
 	public void nomeVacina() {
@@ -238,4 +237,3 @@ public class TelaCriarVacina implements ActionListener {
 		
 	}
 }
-

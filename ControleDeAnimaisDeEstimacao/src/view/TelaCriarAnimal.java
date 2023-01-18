@@ -138,7 +138,7 @@ public class TelaCriarAnimal implements ActionListener {
 		genero.setFont(new Font("", 0, 18));
 		painel.add(genero);
 		
-		String[] generos = {"", "Machp", "Fêmea", "Indefinido"};
+		String[] generos = {"", "Macho", "Fêmea", "Indefinido"};
 		JComboBox<String> boxGeneros = new JComboBox(generos);
 		boxGeneros.setBounds(220, 238, 200, 20);
 		painel.add(boxGeneros);
