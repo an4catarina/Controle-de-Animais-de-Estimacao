@@ -12,7 +12,6 @@ import java.text.ParseException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,22 +19,22 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
-public class TelaCriarRemedio implements ActionListener {
+public class TelaEditarRemedio implements ActionListener {
 	private static JFrame frame;
 	private static JPanel painel;
 	JLabel textDataFinal;
 	JFormattedTextField dataFinal;
 	JComboBox<String> boxEspecie;
-	String[] intervalo = {"", "Dias", "Meses", "Anos"};
+
 	String[] dosagens = {"", "mg", "ml", "g", "comprimido(s)", "cápsula(s)", "gota(s)"};
+	String[] frequenciaS = {"", "Uma vez", "Uso contínuo", "Temporário"};
 	
 	
-	TelaCriarRemedio() {
+	TelaEditarRemedio() {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -85,7 +84,7 @@ public class TelaCriarRemedio implements ActionListener {
 	}
 	
 	public void construirRemedio() {
-		labelAdicionarRemedio();
+		labelEditarRemedio();
 		nomeRemedio();
 		frequencia();
 		dosagem();
@@ -96,12 +95,12 @@ public class TelaCriarRemedio implements ActionListener {
 	}
 	
 	
-	public void labelAdicionarRemedio() {
-		JLabel adicionarRemedio = new JLabel("Criar remédio");
-		adicionarRemedio.setBounds(190, 0, 280, 150);
-		adicionarRemedio.setFont(new Font("", Font.BOLD, 30));
-		adicionarRemedio.setForeground(Color.BLACK);
-		painel.add(adicionarRemedio);
+	public void labelEditarRemedio() {
+		JLabel editarRemedio = new JLabel("Editar remédio");
+		editarRemedio.setBounds(190, 0, 280, 150);
+		editarRemedio.setFont(new Font("", Font.BOLD, 30));
+		editarRemedio.setForeground(Color.BLACK);
+		painel.add(editarRemedio);
 	}
 	
 	public void nomeRemedio() {
@@ -137,7 +136,6 @@ public class TelaCriarRemedio implements ActionListener {
 		frequencia.setFont(new Font("", 0, 18));
 		painel.add(frequencia);
 		
-		String[] frequenciaS = {"", "Uma vez", "Uso contínuo", "Temporário"};
 		boxEspecie = new JComboBox(frequenciaS);
 		boxEspecie.setBounds(220, 180, 200, 20);
 		boxEspecie.addActionListener(this);
@@ -206,19 +204,20 @@ public class TelaCriarRemedio implements ActionListener {
 	
 	
 	public static void main(String[] args) {
-		new TelaCriarRemedio();
+		new TelaEditarRemedio();
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaPerfilPet();
+			 new TelaRemedio();
 	         frame.dispose();
 		}
 		if ("Confirmar" == e.getActionCommand()) {
-			 new TelaPerfilPet();
+			 new TelaRemedio();
 	         frame.dispose();
 		}		
 	}
+
 }

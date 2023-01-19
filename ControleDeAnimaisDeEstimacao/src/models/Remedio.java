@@ -2,19 +2,19 @@ package models;
 
 import java.util.Date;
 
+import enumerate.Frequencia;
 import enumerate.Intervalo;
 
 public class Remedio extends Medicamento {
 	private double dosagem;
-	private int frequencia;
-	private String horario;
-	
-	public Remedio(double dosagem, int frequencia, String horario, String nomeMedicamento, Date data, int periodo, Intervalo intervalo) {
+	private Frequencia frequencia;
+	private int qtdVezes;
+
+	public Remedio(double dosagem, Frequencia frequencia, int qtdVezes, String nomeMedicamento, Date data, int periodo, Intervalo intervalo) {
 		super(nomeMedicamento, data, periodo, intervalo);
 		this.dosagem = dosagem;
 		this.frequencia = frequencia;
-		this.horario = horario;
-	
+		this.qtdVezes = qtdVezes;
 	}
 
 	public double getDosagem() {
@@ -25,20 +25,20 @@ public class Remedio extends Medicamento {
 		this.dosagem = dosagem;
 	}
 
-	public int getFrequencia() {
+	public Frequencia getFrequencia() {
 		return frequencia;
 	}
 
-	public void setFrequencia(int frequencia) {
+	public void setFrequencia(Frequencia frequencia) {
 		this.frequencia = frequencia;
 	}
 
-	public String getHorario() {
-		return horario;
+	public int getQtdVezes() {
+		return qtdVezes;
 	}
 
-	public void setHorario(String horario) {
-		this.horario = horario;
+	public void setQtdVezes(int qtdVezes) {
+		this.qtdVezes = qtdVezes;
 	}
 	
 	public String toString() {
@@ -47,7 +47,7 @@ public class Remedio extends Medicamento {
 		sb.append("Data: " + getData() + "\n");
 		sb.append("Dosagem: " + dosagem + "\n");
 		sb.append("Frequencia: " + frequencia + "\n");
-		sb.append("Horario: " + horario + "\n");
+		sb.append("Qtd: " + qtdVezes + "\n");
 		sb.append("Em um período de " + getPeriodo() + " " + getIntervalo() + "\n");
 		
 		return sb.toString();

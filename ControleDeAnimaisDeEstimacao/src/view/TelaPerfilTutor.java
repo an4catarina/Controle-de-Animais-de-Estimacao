@@ -89,12 +89,11 @@ public class TelaPerfilTutor implements ActionListener {
 	}
 	
 	public void botaoEditarTutor() {
-		JButton botaoEditarPet = new JButton("Editar");
-		botaoEditarPet.setActionCommand("editarTutor");
-		botaoEditarPet.addActionListener(this);
-		botaoEditarPet.setBounds(470, 12, 70, 30);
-		painelTutor.add(botaoEditarPet);
-		
+		JButton botaoEditarTutor = new JButton("Editar");
+		botaoEditarTutor.setActionCommand("editarTutor");
+		botaoEditarTutor.addActionListener(this);
+		botaoEditarTutor.setBounds(470, 12, 70, 30);
+		painelTutor.add(botaoEditarTutor);
 	}
 	
 	public void painelPet() {
@@ -141,11 +140,11 @@ public class TelaPerfilTutor implements ActionListener {
 	}
 
 	public void botaoAdicionarPet() {
-		JButton botaoEditarPet = new JButton("Adicionar pet");
-		botaoEditarPet.setBounds(295, 13, 130, 30);
-		botaoEditarPet.setActionCommand("adicionarPet");
-		botaoEditarPet.addActionListener(this);
-		painelPet.add(botaoEditarPet);
+		JButton botaoAdicionarPet = new JButton("Adicionar pet");
+		botaoAdicionarPet.setBounds(295, 13, 130, 30);
+		botaoAdicionarPet.setActionCommand("adicionarPet");
+		botaoAdicionarPet.addActionListener(this);
+		painelPet.add(botaoAdicionarPet);
 		
 	}
 	

@@ -73,6 +73,15 @@ public class TelaRemedio implements ActionListener {
 	
 	public void implementarElementosRemedio() {
 		texto();
+		botaoEditar();
+	}
+	
+	public void botaoEditar() {
+		JButton botaoEditar = new JButton("Editar");
+		botaoEditar.setActionCommand("editar");
+		botaoEditar.addActionListener(this);
+		botaoEditar.setBounds(470, 12, 70, 30);
+		painel.add(botaoEditar);
 	}
 	
 	public void texto() {
@@ -93,6 +102,9 @@ public class TelaRemedio implements ActionListener {
 		if ("voltar" == e.getActionCommand()) {
 			 new TelaPerfilPet();
 	         frame.dispose();
+		} if ("editar" == e.getActionCommand()) {
+			new TelaEditarRemedio();
+			frame.dispose();
 		}
 		
 	}

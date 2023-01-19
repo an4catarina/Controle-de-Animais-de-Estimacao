@@ -127,8 +127,6 @@ public class TelaPerfilPet implements ActionListener {
 	
 	public void botaoVerVacina() {
 		JButton botao = new JButton("Ver");
-		botao.setActionCommand("verTutor");
-		botao.addActionListener(this);
 		botao.setBounds(80, 11, 70, 30);
 		botao.setActionCommand("verVacina");
 		botao.addActionListener(this);
@@ -184,8 +182,6 @@ public class TelaPerfilPet implements ActionListener {
 	
 	public void botaoVerRemedio() {
 		JButton botao = new JButton("Ver");
-		botao.setActionCommand("verTutor");
-		botao.addActionListener(this);
 		botao.setBounds(80, 11, 70, 30);
 		botao.setActionCommand("verRemedio");
 		botao.addActionListener(this);

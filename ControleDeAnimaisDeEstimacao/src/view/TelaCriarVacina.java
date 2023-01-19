@@ -96,8 +96,8 @@ public class TelaCriarVacina implements ActionListener {
 	
 	
 	public void labelAdicionarVacina() {
-		JLabel adicionarVacina = new JLabel("Adicionar vacina");
-		adicionarVacina.setBounds(150, 0, 280, 150);
+		JLabel adicionarVacina = new JLabel("Criar vacina");
+		adicionarVacina.setBounds(190, 0, 280, 150);
 		adicionarVacina.setFont(new Font("", Font.BOLD, 30));
 		adicionarVacina.setForeground(Color.BLACK);
 		painel.add(adicionarVacina);

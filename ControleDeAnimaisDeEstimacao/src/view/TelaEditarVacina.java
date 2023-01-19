@@ -96,7 +96,7 @@ public class TelaEditarVacina implements ActionListener {
 	
 	public void labelEditarVacina() {
 		JLabel editarVacina = new JLabel("Editar vacina");
-		editarVacina.setBounds(150, 0, 280, 150);
+		editarVacina.setBounds(160, 0, 280, 150);
 		editarVacina.setFont(new Font("", Font.BOLD, 30));
 		editarVacina.setForeground(Color.BLACK);
 		painel.add(editarVacina);
@@ -116,20 +116,17 @@ public class TelaEditarVacina implements ActionListener {
 	}
 	
 	public void dataVacina() {
-		painel.setLayout(null);
 		JLabel data = new JLabel("Data:");
 		data.setBounds(100, 150, 100, 40);
 		data.setFont(new Font("", 0, 18));
 		painel.add(data);
 		
 		JTextField boxVacina = new JTextField();
-		boxVacina.setBounds(220, 120, 200, 20);
 		boxVacina.setBounds(220, 162, 200, 20);
 		painel.add(boxVacina);
 	}
 
 	public void laboratorio() {
-		painel.setLayout(null);
 		JLabel laboratorio = new JLabel("Laboratorio:");
 		laboratorio.setBounds(100, 190, 130, 40);
 		laboratorio.setFont(new Font("", 0, 18));
@@ -142,7 +139,6 @@ public class TelaEditarVacina implements ActionListener {
 	}
 	
 	public void lote() {
-		painel.setLayout(null);
 		JLabel lote = new JLabel("Lote:");
 		lote.setBounds(100, 230, 100, 40);
 		lote.setFont(new Font("", 0, 18));
@@ -156,7 +152,6 @@ public class TelaEditarVacina implements ActionListener {
 	
 	
 	public void necRevacinar() {
-		painel.setLayout(null);
 		JLabel necRevacinar = new JLabel("É necessário revacinar?");
 		necRevacinar.setBounds(100, 270, 250, 40);
 		necRevacinar.setFont(new Font("", 0, 18));
@@ -210,18 +205,18 @@ public class TelaEditarVacina implements ActionListener {
 	
 	
 	public static void main(String[] args) {
-		new TelaCriarVacina();
+		new TelaEditarVacina();
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaPerfilPet();
+			 new TelaVacina();
 	         frame.dispose();
 		}
 		if ("Confirmar" == e.getActionCommand()) {
-			 new TelaPerfilPet();
+			 new TelaVacina();
 	         frame.dispose();
 		} 
 		if (sim.isSelected() == true) {
