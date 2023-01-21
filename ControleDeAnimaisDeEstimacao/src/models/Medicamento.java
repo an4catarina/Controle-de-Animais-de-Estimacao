@@ -9,14 +9,21 @@ public abstract class Medicamento {
 	private Date data;
 	private int periodo;
 	private Intervalo intervalo;
+	private String anotacoes;
 	
-	public Medicamento(String nomeMedicamento, Date data, int periodo, Intervalo intervalo) {
+	public Medicamento(String nomeMedicamento, Date data, int periodo, Intervalo intervalo, String anotacoes) {
 		this.nomeMedicamento = nomeMedicamento;
 		this.data = data;
 		this.periodo = periodo;
 		this.intervalo = intervalo;
+		this.anotacoes = anotacoes;
 	}
 	
+	public Medicamento(String nomeMedicamento, Date data, String anotacoes) {
+		this.nomeMedicamento = nomeMedicamento;
+		this.data = data;
+	}
+
 	public String getNomeMedicamento() {
 		return nomeMedicamento;
 	}
@@ -44,6 +51,14 @@ public abstract class Medicamento {
 
 	public void setIntervalo(Intervalo intervalo) {
 		this.intervalo = intervalo;
+	}
+
+	public String getAnotacoes() {
+		return anotacoes;
+	}
+
+	public void setAnotacoes(String anotacoes) {
+		this.anotacoes = anotacoes;
 	}
 
 	

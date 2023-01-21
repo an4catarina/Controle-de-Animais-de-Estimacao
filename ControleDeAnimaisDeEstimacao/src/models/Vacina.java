@@ -9,8 +9,8 @@ public class Vacina extends Medicamento {
 	private String laboratorio;
 	private boolean necRevacinar;
 	
-	public Vacina(int lote, String laboratorio, boolean necRevacinar, String nomeMedicamento, Date data, int periodo, Intervalo intervalo) {
-		super(nomeMedicamento, data, periodo, intervalo);
+	public Vacina(int lote, String laboratorio, boolean necRevacinar, String nomeMedicamento, Date data, int periodo, Intervalo intervalo, String anotacoes) {
+		super(nomeMedicamento, data, periodo, intervalo, anotacoes);
 		this.lote = lote;
 		this.laboratorio = laboratorio;
 		this.necRevacinar = necRevacinar;

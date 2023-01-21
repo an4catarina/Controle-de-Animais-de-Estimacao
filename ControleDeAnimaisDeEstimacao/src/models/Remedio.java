@@ -2,26 +2,38 @@ package models;
 
 import java.util.Date;
 
+import enumerate.Dosagem;
 import enumerate.Frequencia;
-import enumerate.Intervalo;
 
 public class Remedio extends Medicamento {
-	private double dosagem;
+	private int nroDosagem;
+	private Dosagem dosagem;
 	private Frequencia frequencia;
 	private int qtdVezes;
+	private String dataFinal;
 
-	public Remedio(double dosagem, Frequencia frequencia, int qtdVezes, String nomeMedicamento, Date data, int periodo, Intervalo intervalo) {
-		super(nomeMedicamento, data, periodo, intervalo);
+	public Remedio(int nroDosagem ,Dosagem dosagem, Frequencia frequencia, String dataFinal, int qtdVezes, String nomeMedicamento, Date data, String anotacoes) {
+		super(nomeMedicamento, data, anotacoes);
+		this.setNroDosagem(nroDosagem);
 		this.dosagem = dosagem;
 		this.frequencia = frequencia;
 		this.qtdVezes = qtdVezes;
+		this.dataFinal = dataFinal;
 	}
 
-	public double getDosagem() {
+	public int getNroDosagem() {
+		return nroDosagem;
+	}
+	
+	public void setNroDosagem(int nroDosagem) {
+		this.nroDosagem = nroDosagem;
+	}
+	
+	public Dosagem getDosagem() {
 		return dosagem;
 	}
 
-	public void setDosagem(double dosagem) {
+	public void setDosagem(Dosagem dosagem) {
 		this.dosagem = dosagem;
 	}
 
@@ -41,6 +53,14 @@ public class Remedio extends Medicamento {
 		this.qtdVezes = qtdVezes;
 	}
 	
+	public String getDataFinal() {
+		return dataFinal;
+	}
+	
+	public void setDataFinal(String dataFinal) {
+		this.dataFinal = dataFinal;
+	}
+	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Nome remédio:  " + getNomeMedicamento() + "\n");
@@ -52,4 +72,6 @@ public class Remedio extends Medicamento {
 		
 		return sb.toString();
 	}
+
+
 }

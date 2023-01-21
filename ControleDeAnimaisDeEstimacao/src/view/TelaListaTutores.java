@@ -2,7 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -18,7 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 
@@ -81,11 +79,6 @@ public class TelaListaTutores implements ActionListener {
 		listaTutores.setBounds(10, 50, 530, 420);
 		listaTutores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		painel.add(listaTutores);
-		
-//		JScrollPane scroll = new JScrollPane(listaTutores, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-//		scroll.setViewportView(listaTutores);
-//		painel.add(scroll);
-		
 	}
 	
 	public void texto() {
