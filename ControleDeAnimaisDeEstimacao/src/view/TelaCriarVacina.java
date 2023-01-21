@@ -92,6 +92,7 @@ public class TelaCriarVacina implements ActionListener {
 		necRevacinar();
 		botaoConfirmar();
 		tempode();
+		anotacoes();
 	}
 	
 	
@@ -199,6 +200,16 @@ public class TelaCriarVacina implements ActionListener {
 		painel.add(boxIntervalo);
 	}
 	
+	public void anotacoes() {
+		JLabel anot = new JLabel("Anotações:");
+		anot.setBounds(100, 300, 300, 40);
+		anot.setFont(new Font("", 0, 18));
+		painel.add(anot);
+		
+		JTextField anotacoes = new JTextField();
+		anotacoes.setBounds(200, 310, 250, 84);
+		painel.add(anotacoes);
+	}
 	
 	public void botaoConfirmar() {
 		JButton botao = new JButton("Confirmar");
