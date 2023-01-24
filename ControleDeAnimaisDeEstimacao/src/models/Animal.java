@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+
 import enumerate.Especie;
 import enumerate.Genero;
 import enumerate.Porte;
@@ -11,13 +13,14 @@ public class Animal {
 	private Genero genero;
 	private int idade;
 	private Porte porte;
-	private Saude saude;
+	private ArrayList<Vacina> vacinas;
+	private ArrayList<Remedio> remedios;
 	
 	public Animal() {
 		
 	}
 	
-	public Animal(String nome, Especie especie, String raca, Genero genero, int idade, Porte porte, Saude saude) {
+	public Animal(String nome, Especie especie, String raca, Genero genero, int idade, Porte porte, ArrayList<Vacina> vacinas, ArrayList<Remedio> remedios) {
 		super();
 		this.nome = nome;
 		this.especie = especie;
@@ -25,7 +28,8 @@ public class Animal {
 		this.genero = genero;
 		this.idade = idade;
 		this.porte = porte;
-		this.saude = saude;
+		this.vacinas = vacinas;
+		this.remedios = remedios;
 	}
 
 	public String getNome() {
@@ -75,28 +79,66 @@ public class Animal {
 	public void setPorte(Porte porte) {
 		this.porte = porte;
 	}
-
-
-	public Saude getSaude() {
-		return saude;
+	
+	public ArrayList<Vacina> getVacinas() {
+		return vacinas;
 	}
 
-	public void setSaude(Saude saude) {
-		this.saude = saude;
+	public void setVacinas(ArrayList<Vacina> vacinas) {
+		this.vacinas = vacinas;
 	}
 	
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Nome: " + nome + "\n");
-		sb.append("Especie: " + especie + "\n");
-		sb.append("Raça: " + raca + "\n");
-		sb.append("Gênero: " + genero + "\n");
-		sb.append("Idade: " + idade + "\n");
-		sb.append("Porte " + porte + "\n");
-		sb.append("Saude: " + saude + "\n");
-		sb.append("\n");
-		
-		return sb.toString();
+	public ArrayList<Remedio> getRemedios() {
+		return remedios;
+	}
+
+	public void setRemedios(ArrayList<Remedio> remedios) {
+		this.remedios = remedios;
 	}
 	
+	public void criarAnimal() {
+		BancoDeDados.getAnimais().add(this);
+	}
+	
+	public void editarAnimal(String end) {
+		for (int i = 0; i <= BancoDeDados.getAnimais().size(); i++) {
+			if(BancoDeDados.getAnimais().get(i).getNome().contains(end)) {
+				BancoDeDados.getAnimais().set(i, this);
+				return;
+			}
+			BancoDeDados.getAnimais().add(this);
+		}
+		for (Tutor tutor: BancoDeDados.getTutores()) {
+			for(int k = 0; k < tutor.getAnimais().size(); k++) {
+				if(tutor.getAnimais().get(k).getNome().equals(end)) {
+					tutor.getAnimais().set(k, this);
+					}
+			}
+		}
+	}
+	
+	public void deletarAnimal() {
+		for (int i = 0; i < BancoDeDados.getAnimais().size(); i++) {
+			if(BancoDeDados.getAnimais().get(i).getNome().equals(this.getNome())) {
+				BancoDeDados.getAnimais().remove(i);			}
+		}
+		for (Tutor tutor: BancoDeDados.getTutores()) {
+			for(int k = 0; k < tutor.getAnimais().size(); k++) {
+				if(tutor.getAnimais().get(k).getNome().contains(this.getNome())) {
+					tutor.getAnimais().remove(k);				}
+			}
+		}
+	}
+
+	public static Animal verAnimal(String nomeAnimal) {
+		for (Tutor tutor: BancoDeDados.getTutores()) {
+			for(int k = 0; k < tutor.getAnimais().size(); k++) {
+				if(tutor.getAnimais().get(k).getNome().equals(nomeAnimal)) {
+					return tutor.getAnimais().get(k);
+					}
+			}
+		}
+		return null;
+		}
 }
+

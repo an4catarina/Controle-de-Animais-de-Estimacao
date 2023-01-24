@@ -6,7 +6,7 @@ public class Tutor {
 	private String nome;
 	private String email;
 	private String telefone;
-	private ArrayList<Animal> animais;
+	private ArrayList<Animal> animais = new ArrayList<Animal>();
 	
 	public Tutor(String nome, String email, String telefone, ArrayList<Animal> animais) {
 		this.nome = nome;
@@ -47,18 +47,17 @@ public class Tutor {
 		return animais;
 	}
 
-	public void setAnimais(ArrayList<Animal> animais2) {
-		this.animais = animais2;
+	public void setAnimais(ArrayList<Animal> animais) {
+		this.animais = animais;
 	}
 	
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Tutor: \n");
-		sb.append("Nome: "+ nome + "\n");
-		sb.append("E-mail: "+ email + "\n");
-		sb.append("Telefone: "+ telefone + "\n");
-		sb.append("Animais: " + animais);
-		
-		return sb.toString();
-	}
+//	public void adicionarTutor(Tutor tutor) {
+//		BancoDeDados.getTutores().add(tutor);
+//	}
+	
+//	public void editarTutor(Tutor tutor) {
+//		BancoDeDados
+//
+//	}
+	
 }
