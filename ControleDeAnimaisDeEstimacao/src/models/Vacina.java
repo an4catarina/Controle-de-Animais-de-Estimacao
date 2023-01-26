@@ -1,7 +1,5 @@
 package models;
 
-import java.util.Date;
-
 import enumerate.Intervalo;
 
 public class Vacina extends Medicamento {
@@ -9,7 +7,7 @@ public class Vacina extends Medicamento {
 	private String laboratorio;
 	private boolean necRevacinar;
 	
-	public Vacina(int lote, String laboratorio, boolean necRevacinar, String nomeMedicamento, Date data, int periodo, Intervalo intervalo, String anotacoes) {
+	public Vacina(int lote, String laboratorio, boolean necRevacinar, String nomeMedicamento, String data, int periodo, Intervalo intervalo, String anotacoes) {
 		super(nomeMedicamento, data, periodo, intervalo, anotacoes);
 		this.lote = lote;
 		this.laboratorio = laboratorio;

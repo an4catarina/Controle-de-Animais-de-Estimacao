@@ -19,13 +19,15 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class TelaListaTutores implements ActionListener {
+public class TelaListaPets implements ActionListener, ListSelectionListener {
 	private static JFrame frame;
 	private static JPanel painel;
-	String[] teste = {"teste"}; 
+	JList<String> listaPets; 
 	
-	TelaListaTutores() {
+	public TelaListaPets() {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -68,63 +70,75 @@ public class TelaListaTutores implements ActionListener {
 	
 	public void implementarElementosPainel() {
 		texto();
-		listaTutores();
-		botaoVerTutor();
-		botaoAdicaoTutor();
-		botaoExcluirTutor();
+		listaPets();
+		botaoVerPet();
+		botaoAdicaoPet();
+		botaoExcluirPet();
 	}
 	
-	public void listaTutores() {
-		JList<String> listaTutores = new JList<String>(teste);
-		listaTutores.setBounds(10, 50, 530, 420);
-		listaTutores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		painel.add(listaTutores);
+	public void listaPets() {
+//		String[] listaNomesPets = new ControlePet().getNomePet();
+		listaPets = new JList<String>();
+		listaPets.setBounds(10, 50, 530, 420);
+		listaPets.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		painel.add(listaPets);
 	}
 	
 	public void texto() {
-		JLabel tutores = new JLabel("Tutores");
-		tutores.setBounds(20, 13, 250, 20);
-		tutores.setFont(new Font("", Font.BOLD, 25));
-		tutores.setForeground(Color.BLACK);
-		painel.add(tutores);
+		JLabel Pets = new JLabel("Pets");
+		Pets.setBounds(20, 13, 250, 20);
+		Pets.setFont(new Font("", Font.BOLD, 25));
+		Pets.setForeground(Color.BLACK);
+		painel.add(Pets);
 	}
 	
-	public void botaoVerTutor() {
-		JButton botao = new JButton("Ver tutor");
-		botao.setActionCommand("verTutor");
+	public void botaoVerPet() {
+		JButton botao = new JButton("Ver Pet");
+		botao.setActionCommand("verPet");
 		botao.addActionListener(this);
 		botao.setBounds(195, 13, 100, 30);
 		painel.add(botao);	
 	}
 	
-	public void botaoAdicaoTutor() {
-		JButton botao = new JButton("Adicionar tutor");
-		botao.setBounds(295, 13, 130, 30);
-		botao.setActionCommand("adicionartutor");
-		botao.addActionListener(this);
-		painel.add(botao);	
+	public void botaoAdicaoPet() {
+		JButton botaoCadastrar = new JButton("Adicionar Pet");
+		botaoCadastrar.setBounds(295, 13, 130, 30);
+		botaoCadastrar.setActionCommand("adicionarPet");
+		botaoCadastrar.addActionListener(this);
+		painel.add(botaoCadastrar);	
 	}
 	
-	public void botaoExcluirTutor() {
-		JButton botao = new JButton("Excluir tutor");
+	public void botaoExcluirPet() {
+		JButton botao = new JButton("Excluir Pet");
 		botao.setBounds(425, 13, 120, 30);
 		painel.add(botao);	
 	}
 	
 	public static void main(String[] args) {
-		new TelaListaTutores();
+		new TelaListaPets();
 	}
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if ("adicionartutor" == e.getActionCommand()) {
-			 new TelaCriarTutor();
+		Object src = e.getSource();
+		if (src == "adicionarPet") {
+			 new TelaCriarPet();
 	         frame.dispose();
-	} else if ("verTutor" == e.getActionCommand()) {
-		 new TelaPerfilTutor();
-         frame.dispose();
-}
+		} else if ("verPet" == e.getActionCommand()) {
+			 new TelaPerfilPet();
+	         frame.dispose();
+	}
+		
+	}
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		Object src = e.getSource();
+		
+//		if (e.getValueIsAdjusting() && src == ) {
+//			 new TelaCriarPet(listaPets.);
+//	         frame.dispose();
+//		}
 		
 	}
 

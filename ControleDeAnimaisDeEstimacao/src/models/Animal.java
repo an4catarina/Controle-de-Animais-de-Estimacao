@@ -95,50 +95,45 @@ public class Animal {
 	public void setRemedios(ArrayList<Remedio> remedios) {
 		this.remedios = remedios;
 	}
-	
-	public void criarAnimal() {
-		BancoDeDados.getAnimais().add(this);
-	}
-	
-	public void editarAnimal(String end) {
-		for (int i = 0; i <= BancoDeDados.getAnimais().size(); i++) {
-			if(BancoDeDados.getAnimais().get(i).getNome().contains(end)) {
-				BancoDeDados.getAnimais().set(i, this);
-				return;
-			}
-			BancoDeDados.getAnimais().add(this);
-		}
-		for (Tutor tutor: BancoDeDados.getTutores()) {
-			for(int k = 0; k < tutor.getAnimais().size(); k++) {
-				if(tutor.getAnimais().get(k).getNome().equals(end)) {
-					tutor.getAnimais().set(k, this);
-					}
-			}
-		}
-	}
-	
-	public void deletarAnimal() {
-		for (int i = 0; i < BancoDeDados.getAnimais().size(); i++) {
-			if(BancoDeDados.getAnimais().get(i).getNome().equals(this.getNome())) {
-				BancoDeDados.getAnimais().remove(i);			}
-		}
-		for (Tutor tutor: BancoDeDados.getTutores()) {
-			for(int k = 0; k < tutor.getAnimais().size(); k++) {
-				if(tutor.getAnimais().get(k).getNome().contains(this.getNome())) {
-					tutor.getAnimais().remove(k);				}
-			}
-		}
+
+	public void cadastrarVacina(Vacina vacina) {
+		vacinas.add(vacina);
 	}
 
-	public static Animal verAnimal(String nomeAnimal) {
-		for (Tutor tutor: BancoDeDados.getTutores()) {
-			for(int k = 0; k < tutor.getAnimais().size(); k++) {
-				if(tutor.getAnimais().get(k).getNome().equals(nomeAnimal)) {
-					return tutor.getAnimais().get(k);
-					}
+	public void buscarVacina(String nome) {
+		for (int i = 0; i < vacinas.size(); i++) {
+			if(vacinas.get(i).getNomeMedicamento().equals(nome)) {
+				System.out.println(vacinas.get(i).getNomeMedicamento());
 			}
 		}
-		return null;
+	}
+	
+	public void excluirVacina(Vacina vacina) {
+		for (int i = 0; i < vacinas.size(); i++) {
+			if(vacinas.get(i).equals(vacina)) {
+					vacinas.remove(vacinas.get(i));
+			}
 		}
+	}
+	
+	public void cadastrarRemedio(Remedio remedio) {
+		remedios.add(remedio);
+	}
+
+	public void buscarRemedio(String nome) {
+		for (int i = 0; i < remedios.size(); i++) {
+			if(remedios.get(i).getNomeMedicamento().equals(nome)) {
+				System.out.println(remedios.get(i).getNomeMedicamento());
+			}
+		}
+	}
+	
+	public void excluirRemedio(Remedio remedio) {
+		for (int i = 0; i < remedios.size(); i++) {
+			if(remedios.get(i).equals(remedio)) {
+					remedios.remove(remedios.get(i));
+			}
+		}
+	}
 }
 

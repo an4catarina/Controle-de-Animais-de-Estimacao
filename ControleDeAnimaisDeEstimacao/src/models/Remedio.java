@@ -1,7 +1,5 @@
 package models;
 
-import java.util.Date;
-
 import enumerate.Dosagem;
 import enumerate.Frequencia;
 
@@ -12,7 +10,7 @@ public class Remedio extends Medicamento {
 	private int qtdVezes;
 	private String dataFinal;
 
-	public Remedio(int nroDosagem ,Dosagem dosagem, Frequencia frequencia, String dataFinal, int qtdVezes, String nomeMedicamento, Date data, String anotacoes) {
+	public Remedio(int nroDosagem ,Dosagem dosagem, Frequencia frequencia, String dataFinal, int qtdVezes, String nomeMedicamento,String data, String anotacoes) {
 		super(nomeMedicamento, data, anotacoes);
 		this.setNroDosagem(nroDosagem);
 		this.dosagem = dosagem;

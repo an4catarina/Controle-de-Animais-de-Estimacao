@@ -6,12 +6,12 @@ import enumerate.Intervalo;
 
 public abstract class Medicamento {
 	private String nomeMedicamento;
-	private Date data;
+	private String data;
 	private int periodo;
 	private Intervalo intervalo;
 	private String anotacoes;
 	
-	public Medicamento(String nomeMedicamento, Date data, int periodo, Intervalo intervalo, String anotacoes) {
+	public Medicamento(String nomeMedicamento, String data, int periodo, Intervalo intervalo, String anotacoes) {
 		this.nomeMedicamento = nomeMedicamento;
 		this.data = data;
 		this.periodo = periodo;
@@ -19,7 +19,7 @@ public abstract class Medicamento {
 		this.anotacoes = anotacoes;
 	}
 	
-	public Medicamento(String nomeMedicamento, Date data, String anotacoes) {
+	public Medicamento(String nomeMedicamento, String data, String anotacoes) {
 		this.nomeMedicamento = nomeMedicamento;
 		this.data = data;
 	}
@@ -30,10 +30,10 @@ public abstract class Medicamento {
 	public void setNomeMedicamento(String nomeMedicamento) {
 		this.nomeMedicamento = nomeMedicamento;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 

@@ -25,7 +25,7 @@ public class TelaPerfilPet implements ActionListener {
 	private static JPanel painelVacinas;
 	private static JPanel painelRemedios;
 
-	TelaPerfilPet() {
+	public TelaPerfilPet() {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -148,7 +148,7 @@ public class TelaPerfilPet implements ActionListener {
 	}
 	
 	public void listaVacinas() {
-		JList vacinas = new JList();
+		JList<String> vacinas = new JList<String>();
 		vacinas.setBounds(10, 50, 250, 170);
 		painelVacinas.add(vacinas);
 	}
@@ -204,7 +204,7 @@ public class TelaPerfilPet implements ActionListener {
 	}
 	
 	public void listaRemedios() {
-		JList remedios = new JList();
+		JList<String> remedios = new JList<String>();
 		remedios.setBounds(10, 50, 250, 170);
 		painelRemedios.add(remedios);
 	}
@@ -217,7 +217,7 @@ public class TelaPerfilPet implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaPerfilTutor();
+			 new TelaListaPets();
 	         frame.dispose();
 		} else if ("editarPet" == e.getActionCommand()) {
 			 new TelaEditarPet();

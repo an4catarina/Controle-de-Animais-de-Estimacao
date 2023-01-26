@@ -63,7 +63,7 @@ public class Inicio implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("começar" == e.getActionCommand()) {
-			 new TelaListaTutores();
+			 new TelaListaPets();
 	         frame.dispose();
 	}
 		
