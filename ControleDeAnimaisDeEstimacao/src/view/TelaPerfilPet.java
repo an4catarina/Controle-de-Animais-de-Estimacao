@@ -185,7 +185,7 @@ public class TelaPerfilPet implements ActionListener {
 		labelIdade.setBounds(282, 110, 100, 40);
 		labelIdade.setFont(new Font("", Font.BOLD, 20));
 		painelPet.add(labelIdade);
-		JLabel idadeString = new JLabel(idade + "  anos");
+		JLabel idadeString = new JLabel(idade + " anos");
 		idadeString.setBounds(380, 110, 300, 40);
 		idadeString.setFont(new Font("", Font.PLAIN, 20));
 		painelPet.add(idadeString);

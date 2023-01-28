@@ -57,6 +57,7 @@ public class ControleAnimal {
         dados.getAnimais().get(i).setEspecie(especie);
         dados.getAnimais().get(i).setRaca(raca);
         dados.getAnimais().get(i).setGenero(genero);
+        dados.getAnimais().get(i).setIdade(idade);
         dados.getAnimais().get(i).setPorte(porte);
     } 
 
