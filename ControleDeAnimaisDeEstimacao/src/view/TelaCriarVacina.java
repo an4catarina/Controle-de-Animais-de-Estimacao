@@ -23,6 +23,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import controller.ControleDados;
+
 public class TelaCriarVacina implements ActionListener {
 	private static JFrame frame;
 	private static JPanel painel;
@@ -32,15 +34,18 @@ public class TelaCriarVacina implements ActionListener {
 	JTextField num;
 	JComboBox<String> boxIntervalo;
 	String[] intervalo = {"", "Dias", "Meses", "Anos"};
+	ControleDados dados = new ControleDados();
 	
 	
-	TelaCriarVacina() {
+	TelaCriarVacina(ControleDados dados) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		this.dados = dados;
 		
 		implementarTemplate();
 		painelVacina();
@@ -220,22 +225,17 @@ public class TelaCriarVacina implements ActionListener {
 		
 	}
 	
-	
-	public static void main(String[] args) {
-		new TelaCriarVacina();
-
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if ("voltar" == e.getActionCommand()) {
-			 new TelaPerfilPet();
-	         frame.dispose();
-		}
-		if ("Confirmar" == e.getActionCommand()) {
-			 new TelaPerfilPet();
-	         frame.dispose();
-		} 
+//		if ("voltar" == e.getActionCommand()) {
+//			 new TelaPerfilPet(dados);
+//	         frame.dispose();
+//		}
+//		if ("Confirmar" == e.getActionCommand()) {
+//			 new TelaPerfilPet(dados);
+//	         frame.dispose();
+//		} 
 		if (sim.isSelected() == true) {
 			tempode.setVisible(true);
 			num.setVisible(true);

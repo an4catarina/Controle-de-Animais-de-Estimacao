@@ -20,17 +20,22 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import controller.ControleDados;
+
 public class TelaEditarPet implements ActionListener {
 	private static JFrame frame;
 	private static JPanel painel;
+	ControleDados dados = new ControleDados();
 	
-	TelaEditarPet() {
+	TelaEditarPet(ControleDados dados) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		this.dados = dados;
 		
 		implementarTemplate();
 		painelPets();
@@ -180,20 +185,19 @@ public class TelaEditarPet implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		new TelaEditarPet();
-
+		new Inicio();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if ("voltar" == e.getActionCommand()) {
-			 new TelaPerfilPet();
-	         frame.dispose();
-		}
-		else if ("Confirmar" == e.getActionCommand()) {
-			 new TelaPerfilPet();
-	         frame.dispose();
-		}
+//		if ("voltar" == e.getActionCommand()) {
+//			 new TelaPerfilPet(dados);
+//	         frame.dispose();
+//		}
+//		else if ("Confirmar" == e.getActionCommand()) {
+//			 new TelaPerfilPet(dados);
+//	         frame.dispose();
+//		}
 		
 	}
 }

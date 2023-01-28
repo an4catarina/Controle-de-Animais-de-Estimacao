@@ -1,8 +1,8 @@
 package enumerate;
 
 public enum Genero {
-	Macho,
-	Fêmea,
-	Indefinido
+	MACHO,
+	FEMEA,
+	INDEFINIDO
 }
 

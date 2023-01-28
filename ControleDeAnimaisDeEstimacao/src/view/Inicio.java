@@ -13,9 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import controller.ControleDados;
+
 
 public class Inicio implements ActionListener {
-	private static JFrame frame;
+	private JFrame frame;
+	private ControleDados dados = new ControleDados();
 		
 	Inicio(){
 		frame = new JFrame("My Pet Care");
@@ -25,6 +28,19 @@ public class Inicio implements ActionListener {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
+		implementarTemplate();
+		implementarBotao();
+	}
+	
+	Inicio(ControleDados dados){
+		frame = new JFrame("My Pet Care");
+		frame.setSize(600, 700);
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		
+		this.dados = dados;
 		implementarTemplate();
 		implementarBotao();
 	}
@@ -63,7 +79,7 @@ public class Inicio implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("começar" == e.getActionCommand()) {
-			 new TelaListaPets();
+			 new TelaListaPets(dados);
 	         frame.dispose();
 	}
 		

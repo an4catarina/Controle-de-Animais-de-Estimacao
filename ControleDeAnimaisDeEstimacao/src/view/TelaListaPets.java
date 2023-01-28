@@ -22,12 +22,17 @@ import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import controller.ControleAnimal;
+import controller.ControleDados;
+
 public class TelaListaPets implements ActionListener, ListSelectionListener {
 	private static JFrame frame;
 	private static JPanel painel;
 	JList<String> listaPets; 
+	private ControleAnimal controleAnimal;
+	private ControleDados dados = new ControleDados();
 	
-	public TelaListaPets() {
+	public TelaListaPets(ControleDados dados) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -35,6 +40,8 @@ public class TelaListaPets implements ActionListener, ListSelectionListener {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
+		this.dados = dados;
+		controleAnimal = new ControleAnimal(dados);
 		implementarTemplate();
 		painel();
 	}
@@ -71,16 +78,15 @@ public class TelaListaPets implements ActionListener, ListSelectionListener {
 	public void implementarElementosPainel() {
 		texto();
 		listaPets();
-		botaoVerPet();
 		botaoAdicaoPet();
-		botaoExcluirPet();
 	}
 	
 	public void listaPets() {
-//		String[] listaNomesPets = new ControlePet().getNomePet();
 		listaPets = new JList<String>();
+		listaPets.setModel(controleAnimal.getListaAnimais());
 		listaPets.setBounds(10, 50, 530, 420);
 		listaPets.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		listaPets.addListSelectionListener(this);
 		painel.add(listaPets);
 	}
 	
@@ -92,53 +98,34 @@ public class TelaListaPets implements ActionListener, ListSelectionListener {
 		painel.add(Pets);
 	}
 	
-	public void botaoVerPet() {
-		JButton botao = new JButton("Ver Pet");
-		botao.setActionCommand("verPet");
-		botao.addActionListener(this);
-		botao.setBounds(195, 13, 100, 30);
-		painel.add(botao);	
-	}
-	
 	public void botaoAdicaoPet() {
 		JButton botaoCadastrar = new JButton("Adicionar Pet");
-		botaoCadastrar.setBounds(295, 13, 130, 30);
+		botaoCadastrar.setBounds(425, 13, 120, 30);
 		botaoCadastrar.setActionCommand("adicionarPet");
 		botaoCadastrar.addActionListener(this);
 		painel.add(botaoCadastrar);	
 	}
 	
-	public void botaoExcluirPet() {
-		JButton botao = new JButton("Excluir Pet");
-		botao.setBounds(425, 13, 120, 30);
-		painel.add(botao);	
-	}
-	
 	public static void main(String[] args) {
-		new TelaListaPets();
+		new Inicio();
 	}
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Object src = e.getSource();
-		if (src == "adicionarPet") {
+		if ("adicionarPet" == e.getActionCommand()) {
 			 new TelaCriarPet();
 	         frame.dispose();
-		} else if ("verPet" == e.getActionCommand()) {
-			 new TelaPerfilPet();
-	         frame.dispose();
-	}
-		
+		} 
 	}
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		Object src = e.getSource();
 		
-//		if (e.getValueIsAdjusting() && src == ) {
-//			 new TelaCriarPet(listaPets.);
-//	         frame.dispose();
-//		}
+		if(e.getValueIsAdjusting() && src == listaPets) {
+			controleAnimal.verAnimal(listaPets.getSelectedValue().toString());
+			frame.dispose();
+		}
 		
 	}
 

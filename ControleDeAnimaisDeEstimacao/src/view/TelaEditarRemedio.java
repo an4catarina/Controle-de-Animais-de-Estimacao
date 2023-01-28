@@ -23,6 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
+import controller.ControleDados;
+
 public class TelaEditarRemedio implements ActionListener {
 	private static JFrame frame;
 	private static JPanel painel;
@@ -33,14 +35,18 @@ public class TelaEditarRemedio implements ActionListener {
 	String[] dosagens = {"", "mg", "ml", "g", "comprimido(s)", "cápsula(s)", "gota(s)"};
 	String[] frequenciaS = {"", "Uma vez", "Uso contínuo", "Temporário"};
 	
+	ControleDados dados = new ControleDados();
 	
-	TelaEditarRemedio() {
+	
+	TelaEditarRemedio(ControleDados dados) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		this.dados = dados;
 		
 		implementarTemplate();
 		painelRemedio();
@@ -204,18 +210,18 @@ public class TelaEditarRemedio implements ActionListener {
 	
 	
 	public static void main(String[] args) {
-		new TelaEditarRemedio();
+		new Inicio();
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaRemedio();
+			 new TelaRemedio(dados);
 	         frame.dispose();
 		}
 		if ("Confirmar" == e.getActionCommand()) {
-			 new TelaRemedio();
+			 new TelaRemedio(dados);
 	         frame.dispose();
 		}		
 	}

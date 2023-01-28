@@ -3,21 +3,21 @@ package models;
 import enumerate.Intervalo;
 
 public class Vacina extends Medicamento {
-	private int lote;
+	private String lote;
 	private String laboratorio;
 	private boolean necRevacinar;
 	
-	public Vacina(int lote, String laboratorio, boolean necRevacinar, String nomeMedicamento, String data, int periodo, Intervalo intervalo, String anotacoes) {
+	public Vacina(String lote, String laboratorio, boolean necRevacinar, String nomeMedicamento, String data, int periodo, Intervalo intervalo, String anotacoes) {
 		super(nomeMedicamento, data, periodo, intervalo, anotacoes);
 		this.lote = lote;
 		this.laboratorio = laboratorio;
 		this.necRevacinar = necRevacinar;
 	}
 	
-	public int getLote() {
+	public String getLote() {
 		return lote;
 	}
-	public void setLote(int lote) {
+	public void setLote(String lote) {
 		this.lote = lote;
 	}
 	public String getLaboratorio() {

@@ -18,17 +18,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import controller.ControleDados;
+
 public class TelaRemedio implements ActionListener {
 	private static JFrame frame;
 	private static JPanel painel;
+	ControleDados dados = new ControleDados();
 	
-	TelaRemedio() {
+	public TelaRemedio(ControleDados dados) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		this.dados = dados;
 		
 		implementarTemplate();
 		botaoVoltar();
@@ -93,20 +98,20 @@ public class TelaRemedio implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		new TelaRemedio();
+		new Inicio();
 	}
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if ("voltar" == e.getActionCommand()) {
-			 new TelaPerfilPet();
-	         frame.dispose();
-		} if ("editar" == e.getActionCommand()) {
-			new TelaEditarRemedio();
-			frame.dispose();
-		}
-		
+//		if ("voltar" == e.getActionCommand()) {
+//			 new TelaPerfilPet(dados);
+//	         frame.dispose();
+//		} if ("editar" == e.getActionCommand()) {
+//			new TelaEditarRemedio(dados);
+//			frame.dispose();
+//		}
+//		
 	}
 
 }

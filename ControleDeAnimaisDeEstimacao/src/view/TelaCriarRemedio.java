@@ -23,23 +23,29 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
+import controller.ControleDados;
+
 public class TelaCriarRemedio implements ActionListener {
 	private static JFrame frame;
 	private static JPanel painel;
 	JLabel textDataFinal;
 	JFormattedTextField dataFinal;
 	JComboBox<String> boxEspecie;
+	JComboBox<String> boxFrequencia;
 	String[] intervalo = {"", "Dias", "Meses", "Anos"};
 	String[] dosagens = {"", "mg", "ml", "g", "comprimido(s)", "cápsula(s)", "gota(s)"};
+	ControleDados dados = new ControleDados();
 	
 	
-	TelaCriarRemedio() {
+	TelaCriarRemedio(ControleDados dados) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		this.dados = dados;
 		
 		implementarTemplate();
 		painelRemedio();
@@ -136,10 +142,10 @@ public class TelaCriarRemedio implements ActionListener {
 		painel.add(frequencia);
 		
 		String[] frequenciaS = {"", "Uma vez", "Uso contínuo", "Temporário"};
-		boxEspecie = new JComboBox(frequenciaS);
-		boxEspecie.setBounds(220, 180, 200, 20);
-		boxEspecie.addActionListener(this);
-		painel.add(boxEspecie);
+		boxFrequencia = new JComboBox(frequenciaS);
+		boxFrequencia.setBounds(220, 180, 200, 20);
+		boxFrequencia.addActionListener(this);
+		painel.add(boxFrequencia);
 	}
 	
 	public void datas() {
@@ -204,19 +210,18 @@ public class TelaCriarRemedio implements ActionListener {
 	
 	
 	public static void main(String[] args) {
-		new TelaCriarRemedio();
-
+		new Inicio();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if ("voltar" == e.getActionCommand()) {
-			 new TelaPerfilPet();
-	         frame.dispose();
-		}
-		if ("Confirmar" == e.getActionCommand()) {
-			 new TelaPerfilPet();
-	         frame.dispose();
-		}		
+//		if ("voltar" == e.getActionCommand()) {
+//			 new TelaPerfilPet(dados);
+//	         frame.dispose();
+//		}
+//		if ("Confirmar" == e.getActionCommand()) {
+//			 new TelaPerfilPet(dados);
+//	         frame.dispose();
+//		}		
 	}
 }

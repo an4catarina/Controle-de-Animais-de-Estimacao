@@ -19,19 +19,43 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import controller.ControleAnimal;
+import controller.ControleDados;
+import controller.ControleRemedio;
+import controller.ControleVacina;
+import enumerate.Especie;
+import enumerate.Genero;
+import enumerate.Porte;
+
 public class TelaPerfilPet implements ActionListener {
 	JFrame frame = new JFrame();
 	private static JPanel painelPet;
 	private static JPanel painelVacinas;
 	private static JPanel painelRemedios;
+	private ControleVacina controleVacina;
+	private ControleRemedio controleRemedio;
+	private ControleAnimal controleAnimal;
+	private ControleDados dados = new ControleDados();;
+	private String nome;
+	private String especieS;
+	private String raca;
+	private String generoS;
+	private int idade;
+	private String porteS;
 
-	public TelaPerfilPet() {
+	public TelaPerfilPet(ControleDados dados, String nome) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		this.nome = nome;
+		this.dados = dados;
+		controleVacina = new ControleVacina();
+		controleRemedio = new ControleRemedio();
+		controleAnimal = new ControleAnimal(dados);
 		
 		implementarTemplate();
 		painelPet();
@@ -78,23 +102,133 @@ public class TelaPerfilPet implements ActionListener {
 	
 	public void implementarElementosPet() {
 		botaoEditarPet();
+		botaoExcluirPet();
 		texto();
+		dadosPet();
 	}
 	
 	public void texto() {
 		JLabel pet = new JLabel("Pet");
-		pet.setBounds(20, 13, 250, 20);
-		pet.setFont(new Font("", Font.BOLD, 25));
+		pet.setBounds(20, 10, 250, 40);
+		pet.setFont(new Font("", Font.BOLD, 30));
 		pet.setForeground(Color.BLACK);
 		painelPet.add(pet);
+	}
+	
+	public void dadosPet() {
+		for (int j = 0; j < dados.getQtdAnimais(); j++) {
+			if(dados.getAnimais().get(j).getNome().equals(nome)) {
+				
+				JLabel labelNome = new JLabel("Nome:");
+				labelNome.setBounds(60, 70, 100, 40);
+				labelNome.setFont(new Font("", Font.BOLD, 20));
+				painelPet.add(labelNome);
+				JLabel nomeString = new JLabel(nome);
+				nomeString.setBounds(160, 70, 300, 40);
+				nomeString.setFont(new Font("", Font.PLAIN, 20));
+				painelPet.add(nomeString);
+
+				Especie especie = dados.getAnimais().get(j).getEspecie();
+				if (especie == Especie.CANINO) {
+					especieS = "Canino";
+				} else if (especie == Especie.FELINO) {
+					especieS = "Felino";
+				} else if (especie == Especie.AVE) {
+					especieS = "Ave";
+				} else if (especie == Especie.ROEDOR) {
+					especieS = "Roedor";
+				} else {
+					especieS = "Não informado";
+				}
+				
+				JLabel labelEspecie = new JLabel("Especie:");
+				labelEspecie.setBounds(60, 110, 100, 40);
+				labelEspecie.setFont(new Font("", Font.BOLD, 20));
+				painelPet.add(labelEspecie);
+				JLabel especieString = new JLabel(especieS);
+				especieString.setBounds(160, 110, 300, 40);
+				especieString.setFont(new Font("", Font.PLAIN, 20));
+				painelPet.add(especieString);
+				
+				raca = dados.getAnimais().get(j).getRaca();
+				JLabel labelRaca = new JLabel("Raça:");
+				labelRaca.setBounds(60, 150, 100, 40);
+				labelRaca.setFont(new Font("", Font.BOLD, 20));
+				painelPet.add(labelRaca);
+				JLabel racaString = new JLabel(raca);
+				racaString.setBounds(160, 150, 300, 40);
+				racaString.setFont(new Font("", Font.PLAIN, 20));
+				painelPet.add(racaString);
+				
+				Genero genero = dados.getAnimais().get(j).getGenero();
+				if (genero == Genero.FEMEA) {
+					generoS = "Fêmea";
+				} else if (genero == Genero.MACHO) {
+					generoS = "Macho";
+				} else if (genero == Genero.INDEFINIDO) {
+					generoS = "Indefinido";
+				} else {
+					generoS = "Não informado";
+				}
+				
+				JLabel labelGenero = new JLabel("Gênero:");
+				labelGenero.setBounds(280, 70, 100, 40);
+				labelGenero.setFont(new Font("", Font.BOLD, 20));
+				painelPet.add(labelGenero);
+				JLabel generoString = new JLabel(generoS);
+				generoString.setBounds(380, 70, 300, 40);
+				generoString.setFont(new Font("", Font.PLAIN, 20));
+				painelPet.add(generoString);
+				
+				idade = dados.getAnimais().get(j).getIdade();
+				JLabel labelIdade = new JLabel("Idade:");
+				labelIdade.setBounds(282, 110, 100, 40);
+				labelIdade.setFont(new Font("", Font.BOLD, 20));
+				painelPet.add(labelIdade);
+				JLabel idadeString = new JLabel(idade + "  anos");
+				idadeString.setBounds(380, 110, 300, 40);
+				idadeString.setFont(new Font("", Font.PLAIN, 20));
+				painelPet.add(idadeString);
+				
+				Porte porte = dados.getAnimais().get(j).getPorte();
+				if (porte == Porte.GRANDE) {
+					porteS = "Grande";
+				} else if (porte == Porte.MEDIO) {
+					porteS = "Médio";
+				} else if (porte == Porte.MINI) {
+					porteS = "Mini";
+				} else if (porte == Porte.PEQUENO) {
+					porteS = "Pequeno";
+				} else {
+					porteS = "Não informado";
+				}
+				JLabel labelPorte = new JLabel("Porte:");
+				labelPorte.setBounds(280, 150, 100, 40);
+				labelPorte.setFont(new Font("", Font.BOLD, 20));
+				painelPet.add(labelPorte);
+				JLabel porteString = new JLabel(porteS);
+				porteString.setBounds(380, 150, 300, 40);
+				porteString.setFont(new Font("", Font.PLAIN, 20));
+				painelPet.add(porteString);
+				
+			}
+		}
 	}
 	
 	public void botaoEditarPet() {
 		JButton botaoEditarPet = new JButton("Editar");
 		botaoEditarPet.setActionCommand("editarPet");
 		botaoEditarPet.addActionListener(this);
-		botaoEditarPet.setBounds(475, 12, 70, 30);
+		botaoEditarPet.setBounds(410, 12, 70, 30);
 		painelPet.add(botaoEditarPet);
+	}
+	
+	public void botaoExcluirPet() {
+		JButton botaoExcluirPet = new JButton("Excluir");
+		botaoExcluirPet.setActionCommand("excluirPet");
+		botaoExcluirPet.addActionListener(this);
+		botaoExcluirPet.setBounds(475, 12, 70, 30);
+		painelPet.add(botaoExcluirPet);
 		
 	}
 	
@@ -112,7 +246,6 @@ public class TelaPerfilPet implements ActionListener {
 	public void implementarElementosVacinas() {
 		textoVacinas();
 		botaoCriarVacina();
-		botaoVerVacina();
 		botaoExcluirVacina();
 		listaVacinas();
 	}
@@ -123,14 +256,6 @@ public class TelaPerfilPet implements ActionListener {
 		vacinas.setFont(new Font("", Font.BOLD, 15));
 		vacinas.setForeground(Color.BLACK);
 		painelVacinas.add(vacinas);
-	}
-	
-	public void botaoVerVacina() {
-		JButton botao = new JButton("Ver");
-		botao.setBounds(80, 11, 70, 30);
-		botao.setActionCommand("verVacina");
-		botao.addActionListener(this);
-		painelVacinas.add(botao);	
 	}
 	
 	public void botaoCriarVacina() {
@@ -167,7 +292,6 @@ public class TelaPerfilPet implements ActionListener {
 	public void implementarElementosRemedios() {
 		botaoCriarRemedio();
 		textoRemedios();
-		botaoVerRemedio();
 		botaoExcluirRemedio();
 		listaRemedios();
 	}
@@ -180,13 +304,6 @@ public class TelaPerfilPet implements ActionListener {
 		painelRemedios.add(remedios);
 	}
 	
-	public void botaoVerRemedio() {
-		JButton botao = new JButton("Ver");
-		botao.setBounds(80, 11, 70, 30);
-		botao.setActionCommand("verRemedio");
-		botao.addActionListener(this);
-		painelRemedios.add(botao);	
-	}
 	
 	public void botaoCriarRemedio() {
 		JButton botaoCriarRemedio = new JButton("Criar");
@@ -210,29 +327,28 @@ public class TelaPerfilPet implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		new TelaPerfilPet();
-
+		new Inicio();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaListaPets();
+			 new TelaListaPets(dados);
 	         frame.dispose();
 		} else if ("editarPet" == e.getActionCommand()) {
-			 new TelaEditarPet();
+			 new TelaEditarPet(dados);
 	         frame.dispose();
 		} else if ("criarVacina" == e.getActionCommand()) {
-			 new TelaCriarVacina();
+			 new TelaCriarVacina(dados);
 	         frame.dispose();
 		} else if ("criarRemedio" == e.getActionCommand()) {
-			 new TelaCriarRemedio();
+			 new TelaCriarRemedio(dados);
 	         frame.dispose();
 		} else if ("verRemedio" == e.getActionCommand()) {
-			 new TelaRemedio();
+			 new TelaRemedio(dados);
 	         frame.dispose();
 		} else if ("verVacina" == e.getActionCommand()) {
-			 new TelaVacina();
+			 new TelaVacina(dados);
 	         frame.dispose();
 		} 
 		

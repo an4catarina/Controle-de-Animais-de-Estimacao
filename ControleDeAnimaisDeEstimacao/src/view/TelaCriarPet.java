@@ -16,13 +16,28 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import controller.ControleAnimal;
+import controller.ControleDados;
+import enumerate.Especie;
+import enumerate.Genero;
+import enumerate.Porte;
+
 public class TelaCriarPet implements ActionListener {
-	private static JFrame frame;
-	private static JPanel painel;
+	private JFrame frame;
+	private JPanel painel;
+	private JTextField textNome;
+	private JComboBox<String> boxEspecie;
+	private JTextField textRaca;
+	private JComboBox<String> boxGeneros;
+	private JTextField textIdade;
+	private JComboBox<String> boxPorte;
+	private ControleAnimal controleAnimal;
+	private ControleDados dados;
 	
 	TelaCriarPet() {
 		frame = new JFrame("My Pet Care");
@@ -32,6 +47,8 @@ public class TelaCriarPet implements ActionListener {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
+		dados = new ControleDados();
+		controleAnimal = new ControleAnimal(dados);
 		implementarTemplate();
 		painelPets();
 		botaoVoltar();
@@ -99,7 +116,7 @@ public class TelaCriarPet implements ActionListener {
 		nomeAnimal.setFont(new Font("", 0, 18));
 		painel.add(nomeAnimal);
 		
-		JTextField textNome = new JTextField();
+		textNome = new JTextField();
 		textNome.setBounds(220, 120, 200, 20);
 		painel.add(textNome);
 		
@@ -113,7 +130,7 @@ public class TelaCriarPet implements ActionListener {
 		painel.add(especie);
 		
 		String[] especies = {"", "Canino", "Felino", "Ave", "Roedor"};
-		JComboBox<String> boxEspecie = new JComboBox(especies);
+		boxEspecie = new JComboBox<String>(especies);
 		boxEspecie.setBounds(220, 162, 200, 20);
 		painel.add(boxEspecie);
 	}
@@ -124,7 +141,8 @@ public class TelaCriarPet implements ActionListener {
 		raca.setBounds(140, 190, 100, 40);
 		raca.setFont(new Font("", 0, 18));
 		painel.add(raca);
-		JTextField textRaca = new JTextField();
+		
+		textRaca = new JTextField();
 		textRaca.setBounds(220, 200, 200, 20);
 		painel.add(textRaca);
 		
@@ -138,7 +156,7 @@ public class TelaCriarPet implements ActionListener {
 		painel.add(genero);
 		
 		String[] generos = {"", "Macho", "Fêmea", "Indefinido"};
-		JComboBox<String> boxGeneros = new JComboBox(generos);
+		boxGeneros = new JComboBox<String>(generos);
 		boxGeneros.setBounds(220, 238, 200, 20);
 		painel.add(boxGeneros);
 		
@@ -150,7 +168,8 @@ public class TelaCriarPet implements ActionListener {
 		idade.setBounds(140, 270, 100, 40);
 		idade.setFont(new Font("", 0, 18));
 		painel.add(idade);
-		JTextField textIdade = new JTextField();
+		
+		textIdade = new JTextField();
 		textIdade.setBounds(220, 280, 200, 20);
 		painel.add(textIdade);
 		
@@ -164,7 +183,7 @@ public class TelaCriarPet implements ActionListener {
 		painel.add(porte);
 		
 		String[] portes = {"", "Mini", "Pequeno", "Medio", "Grande"};
-		JComboBox<String> boxPorte = new JComboBox(portes);
+		boxPorte = new JComboBox<String>(portes);
 		boxPorte.setBounds(220, 321, 200, 20);
 		painel.add(boxPorte);
 		
@@ -179,19 +198,89 @@ public class TelaCriarPet implements ActionListener {
 		
 	}
 	
+	public void criar() {
+		String nome = textNome.getText();
+		
+		Especie especie = null;
+		int escolhaEspecie = boxEspecie.getSelectedIndex();
+		switch(escolhaEspecie) {
+		case 1:
+			especie = Especie.CANINO;
+			break;
+		case 2:
+			especie = Especie.FELINO;
+			break;
+		case 3:
+			especie = Especie.AVE;
+			break;
+		case 4:
+			especie = Especie.ROEDOR;
+			break;
+		default:
+			especie = null;
+			break;
+		}
+		
+		String raca = textRaca.getText();
+		
+		Genero genero = null;
+		int escolhaGenero = boxGeneros.getSelectedIndex();
+		switch(escolhaGenero) {
+		case 1:
+			genero = Genero.MACHO;
+			break;
+		case 2:
+			genero = Genero.FEMEA;
+			break;
+		case 3:
+			genero = Genero.INDEFINIDO;
+			break;
+		default:
+			genero = null;
+			break;
+		}
+		
+		String stringIdade = textIdade.getText();
+		int idade = Integer.parseInt(stringIdade);
+		
+		Porte porte = null;
+		int escolhaPorte = boxPorte.getSelectedIndex();
+		switch(escolhaPorte) {
+		case 1:
+			porte = Porte.MINI;
+			break;
+		case 2:
+			porte = Porte.PEQUENO;
+			break;
+		case 3:
+			porte = Porte.MEDIO;
+			break;
+		case 4:
+			porte = Porte.GRANDE;
+			break;
+		default:
+			porte = null;
+			break;
+		}
+		
+		controleAnimal.adicionarAnimal(nome, especie, raca, genero, idade, porte);
+	}
+	
 	public static void main(String[] args) {
-		new TelaCriarPet();
+		new Inicio();
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaListaPets();
+			 new TelaListaPets(dados);
 	         frame.dispose();
 		}
 		else if ("Confirmar" == e.getActionCommand()) {
-			 new TelaListaPets();
+			 criar();
+			 JOptionPane.showMessageDialog(null, "Animal cadastrado com sucesso!");
+			 new TelaListaPets(dados);
 	         frame.dispose();
 		}
 		
