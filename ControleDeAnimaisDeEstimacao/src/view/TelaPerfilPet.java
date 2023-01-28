@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -36,6 +37,7 @@ public class TelaPerfilPet implements ActionListener {
 	private ControleRemedio controleRemedio;
 	private ControleAnimal controleAnimal;
 	private ControleDados dados = new ControleDados();;
+	private int i;
 	private String nome;
 	private String especieS;
 	private String raca;
@@ -43,7 +45,7 @@ public class TelaPerfilPet implements ActionListener {
 	private int idade;
 	private String porteS;
 
-	public TelaPerfilPet(ControleDados dados, String nome) {
+	public TelaPerfilPet(ControleDados dados, int i) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -51,7 +53,7 @@ public class TelaPerfilPet implements ActionListener {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
-		this.nome = nome;
+		this.i = i;
 		this.dados = dados;
 		controleVacina = new ControleVacina();
 		controleRemedio = new ControleRemedio();
@@ -104,7 +106,7 @@ public class TelaPerfilPet implements ActionListener {
 		botaoEditarPet();
 		botaoExcluirPet();
 		texto();
-		dadosPet();
+		dadosPet(i);
 	}
 	
 	public void texto() {
@@ -115,105 +117,101 @@ public class TelaPerfilPet implements ActionListener {
 		painelPet.add(pet);
 	}
 	
-	public void dadosPet() {
-		for (int j = 0; j < dados.getQtdAnimais(); j++) {
-			if(dados.getAnimais().get(j).getNome().equals(nome)) {
-				
-				JLabel labelNome = new JLabel("Nome:");
-				labelNome.setBounds(60, 70, 100, 40);
-				labelNome.setFont(new Font("", Font.BOLD, 20));
-				painelPet.add(labelNome);
-				JLabel nomeString = new JLabel(nome);
-				nomeString.setBounds(160, 70, 300, 40);
-				nomeString.setFont(new Font("", Font.PLAIN, 20));
-				painelPet.add(nomeString);
+	public void dadosPet(int i) {
+		nome = dados.getAnimais().get(i).getNome();
+		JLabel labelNome = new JLabel("Nome:");
+		labelNome.setBounds(60, 70, 100, 40);
+		labelNome.setFont(new Font("", Font.BOLD, 20));
+		painelPet.add(labelNome);
+		JLabel nomeString = new JLabel(nome);
+		nomeString.setBounds(160, 70, 300, 40);
+		nomeString.setFont(new Font("", Font.PLAIN, 20));
+		painelPet.add(nomeString);
 
-				Especie especie = dados.getAnimais().get(j).getEspecie();
-				if (especie == Especie.CANINO) {
-					especieS = "Canino";
-				} else if (especie == Especie.FELINO) {
-					especieS = "Felino";
-				} else if (especie == Especie.AVE) {
-					especieS = "Ave";
-				} else if (especie == Especie.ROEDOR) {
-					especieS = "Roedor";
-				} else {
-					especieS = "Não informado";
-				}
-				
-				JLabel labelEspecie = new JLabel("Especie:");
-				labelEspecie.setBounds(60, 110, 100, 40);
-				labelEspecie.setFont(new Font("", Font.BOLD, 20));
-				painelPet.add(labelEspecie);
-				JLabel especieString = new JLabel(especieS);
-				especieString.setBounds(160, 110, 300, 40);
-				especieString.setFont(new Font("", Font.PLAIN, 20));
-				painelPet.add(especieString);
-				
-				raca = dados.getAnimais().get(j).getRaca();
-				JLabel labelRaca = new JLabel("Raça:");
-				labelRaca.setBounds(60, 150, 100, 40);
-				labelRaca.setFont(new Font("", Font.BOLD, 20));
-				painelPet.add(labelRaca);
-				JLabel racaString = new JLabel(raca);
-				racaString.setBounds(160, 150, 300, 40);
-				racaString.setFont(new Font("", Font.PLAIN, 20));
-				painelPet.add(racaString);
-				
-				Genero genero = dados.getAnimais().get(j).getGenero();
-				if (genero == Genero.FEMEA) {
-					generoS = "Fêmea";
-				} else if (genero == Genero.MACHO) {
-					generoS = "Macho";
-				} else if (genero == Genero.INDEFINIDO) {
-					generoS = "Indefinido";
-				} else {
-					generoS = "Não informado";
-				}
-				
-				JLabel labelGenero = new JLabel("Gênero:");
-				labelGenero.setBounds(280, 70, 100, 40);
-				labelGenero.setFont(new Font("", Font.BOLD, 20));
-				painelPet.add(labelGenero);
-				JLabel generoString = new JLabel(generoS);
-				generoString.setBounds(380, 70, 300, 40);
-				generoString.setFont(new Font("", Font.PLAIN, 20));
-				painelPet.add(generoString);
-				
-				idade = dados.getAnimais().get(j).getIdade();
-				JLabel labelIdade = new JLabel("Idade:");
-				labelIdade.setBounds(282, 110, 100, 40);
-				labelIdade.setFont(new Font("", Font.BOLD, 20));
-				painelPet.add(labelIdade);
-				JLabel idadeString = new JLabel(idade + "  anos");
-				idadeString.setBounds(380, 110, 300, 40);
-				idadeString.setFont(new Font("", Font.PLAIN, 20));
-				painelPet.add(idadeString);
-				
-				Porte porte = dados.getAnimais().get(j).getPorte();
-				if (porte == Porte.GRANDE) {
-					porteS = "Grande";
-				} else if (porte == Porte.MEDIO) {
-					porteS = "Médio";
-				} else if (porte == Porte.MINI) {
-					porteS = "Mini";
-				} else if (porte == Porte.PEQUENO) {
-					porteS = "Pequeno";
-				} else {
-					porteS = "Não informado";
-				}
-				JLabel labelPorte = new JLabel("Porte:");
-				labelPorte.setBounds(280, 150, 100, 40);
-				labelPorte.setFont(new Font("", Font.BOLD, 20));
-				painelPet.add(labelPorte);
-				JLabel porteString = new JLabel(porteS);
-				porteString.setBounds(380, 150, 300, 40);
-				porteString.setFont(new Font("", Font.PLAIN, 20));
-				painelPet.add(porteString);
+		Especie especie = dados.getAnimais().get(i).getEspecie();
+		if (especie == Especie.CANINO) {
+			especieS = "Canino";
+		} else if (especie == Especie.FELINO) {
+			especieS = "Felino";
+		} else if (especie == Especie.AVE) {
+			especieS = "Ave";
+		} else if (especie == Especie.ROEDOR) {
+			especieS = "Roedor";
+		} else {
+			especieS = "Não informado";
+		}
+		
+		JLabel labelEspecie = new JLabel("Especie:");
+		labelEspecie.setBounds(60, 110, 100, 40);
+		labelEspecie.setFont(new Font("", Font.BOLD, 20));
+		painelPet.add(labelEspecie);
+		JLabel especieString = new JLabel(especieS);
+		especieString.setBounds(160, 110, 300, 40);
+		especieString.setFont(new Font("", Font.PLAIN, 20));
+		painelPet.add(especieString);
+		
+		raca = dados.getAnimais().get(i).getRaca();
+		JLabel labelRaca = new JLabel("Raça:");
+		labelRaca.setBounds(60, 150, 100, 40);
+		labelRaca.setFont(new Font("", Font.BOLD, 20));
+		painelPet.add(labelRaca);
+		JLabel racaString = new JLabel(raca);
+		racaString.setBounds(160, 150, 300, 40);
+		racaString.setFont(new Font("", Font.PLAIN, 20));
+		painelPet.add(racaString);
+		
+		Genero genero = dados.getAnimais().get(i).getGenero();
+		if (genero == Genero.FEMEA) {
+			generoS = "Fêmea";
+		} else if (genero == Genero.MACHO) {
+			generoS = "Macho";
+		} else if (genero == Genero.INDEFINIDO) {
+			generoS = "Indefinido";
+		} else {
+			generoS = "Não informado";
+		}
+		
+		JLabel labelGenero = new JLabel("Gênero:");
+		labelGenero.setBounds(280, 70, 100, 40);
+		labelGenero.setFont(new Font("", Font.BOLD, 20));
+		painelPet.add(labelGenero);
+		JLabel generoString = new JLabel(generoS);
+		generoString.setBounds(380, 70, 300, 40);
+		generoString.setFont(new Font("", Font.PLAIN, 20));
+		painelPet.add(generoString);
+		
+		idade = dados.getAnimais().get(i).getIdade();
+		JLabel labelIdade = new JLabel("Idade:");
+		labelIdade.setBounds(282, 110, 100, 40);
+		labelIdade.setFont(new Font("", Font.BOLD, 20));
+		painelPet.add(labelIdade);
+		JLabel idadeString = new JLabel(idade + "  anos");
+		idadeString.setBounds(380, 110, 300, 40);
+		idadeString.setFont(new Font("", Font.PLAIN, 20));
+		painelPet.add(idadeString);
+		
+		Porte porte = dados.getAnimais().get(i).getPorte();
+		if (porte == Porte.GRANDE) {
+			porteS = "Grande";
+		} else if (porte == Porte.MEDIO) {
+			porteS = "Médio";
+		} else if (porte == Porte.MINI) {
+			porteS = "Mini";
+		} else if (porte == Porte.PEQUENO) {
+			porteS = "Pequeno";
+		} else {
+			porteS = "Não informado";
+		}
+		JLabel labelPorte = new JLabel("Porte:");
+		labelPorte.setBounds(280, 150, 100, 40);
+		labelPorte.setFont(new Font("", Font.BOLD, 20));
+		painelPet.add(labelPorte);
+		JLabel porteString = new JLabel(porteS);
+		porteString.setBounds(380, 150, 300, 40);
+		porteString.setFont(new Font("", Font.PLAIN, 20));
+		painelPet.add(porteString);
 				
 			}
-		}
-	}
 	
 	public void botaoEditarPet() {
 		JButton botaoEditarPet = new JButton("Editar");
@@ -336,7 +334,7 @@ public class TelaPerfilPet implements ActionListener {
 			 new TelaListaPets(dados);
 	         frame.dispose();
 		} else if ("editarPet" == e.getActionCommand()) {
-			 new TelaEditarPet(dados);
+			 new TelaEditarPet(dados, i);
 	         frame.dispose();
 		} else if ("criarVacina" == e.getActionCommand()) {
 			 new TelaCriarVacina(dados);
@@ -345,10 +343,15 @@ public class TelaPerfilPet implements ActionListener {
 			 new TelaCriarRemedio(dados);
 	         frame.dispose();
 		} else if ("verRemedio" == e.getActionCommand()) {
-			 new TelaRemedio(dados);
+			 new TelaRemedio(dados, i);
 	         frame.dispose();
 		} else if ("verVacina" == e.getActionCommand()) {
-			 new TelaVacina(dados);
+			 new TelaVacina(dados, i);
+	         frame.dispose();
+		} else if ("excluirPet" == e.getActionCommand()) {
+			 controleAnimal.excluirAnimal(i);
+			 new TelaListaPets(dados);
+			 JOptionPane.showMessageDialog(null, "Animal excluído com sucesso");
 	         frame.dispose();
 		} 
 		

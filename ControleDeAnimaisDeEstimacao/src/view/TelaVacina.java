@@ -24,8 +24,9 @@ public class TelaVacina implements ActionListener {
 	private static JFrame frame;
 	private static JPanel painel;
 	private ControleDados dados = new ControleDados();
+	private int i;
 	
-	public TelaVacina(ControleDados dados) {
+	public TelaVacina(ControleDados dados, int i) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -34,7 +35,7 @@ public class TelaVacina implements ActionListener {
 		frame.setVisible(true);
 		
 		this.dados = dados;
-		
+		this.i = i;
 		implementarTemplate();
 		botaoVoltar();
 		painel();
@@ -104,14 +105,14 @@ public class TelaVacina implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		if ("voltar" == e.getActionCommand()) {
-//			 new TelaPerfilPet(dados);
-//	         frame.dispose();
-//		} if ("editar" == e.getActionCommand()) {
-//			new TelaEditarVacina(dados);
-//			frame.dispose();
-//		}
-//		
+		if ("voltar" == e.getActionCommand()) {
+			 new TelaPerfilPet(dados, i);
+	         frame.dispose();
+		} if ("editar" == e.getActionCommand()) {
+			new TelaEditarVacina(dados, i);
+			frame.dispose();
+		}
+		
 	}
 
 }

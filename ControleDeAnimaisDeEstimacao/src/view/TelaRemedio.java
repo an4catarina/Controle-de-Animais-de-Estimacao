@@ -21,11 +21,12 @@ import javax.swing.border.Border;
 import controller.ControleDados;
 
 public class TelaRemedio implements ActionListener {
-	private static JFrame frame;
-	private static JPanel painel;
+	private JFrame frame;
+	private JPanel painel;
 	ControleDados dados = new ControleDados();
+	private int i;
 	
-	public TelaRemedio(ControleDados dados) {
+	public TelaRemedio(ControleDados dados, int i) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);

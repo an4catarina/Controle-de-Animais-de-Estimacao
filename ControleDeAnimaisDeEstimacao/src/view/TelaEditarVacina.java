@@ -25,18 +25,19 @@ import javax.swing.border.Border;
 import controller.ControleDados;
 
 public class TelaEditarVacina implements ActionListener {
-	private static JFrame frame;
-	private static JPanel painel;
-	private static JRadioButton sim;
-	private static JRadioButton nao;
-	JLabel tempode;
-	JTextField num;
-	JComboBox<String> boxIntervalo;
-	String[] intervalo = {"", "Dias", "Meses", "Anos"};
-	ControleDados dados = new ControleDados();
+	private JFrame frame;
+	private JPanel painel;
+	private JRadioButton sim;
+	private JRadioButton nao;
+	private JLabel tempode;
+	private JTextField num;
+	private JComboBox<String> boxIntervalo;
+	private String[] intervalo = {"", "Dias", "Meses", "Anos"};
+	private ControleDados dados = new ControleDados();
+	private int i;
 	
 	
-	TelaEditarVacina(ControleDados dados) {
+	TelaEditarVacina(ControleDados dados, int i) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -228,11 +229,11 @@ public class TelaEditarVacina implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaVacina(dados);
+			 new TelaVacina(dados, i);
 	         frame.dispose();
 		}
 		if ("Confirmar" == e.getActionCommand()) {
-			 new TelaVacina(dados);
+			 new TelaVacina(dados, i);
 	         frame.dispose();
 		} 
 		if (sim.isSelected() == true) {

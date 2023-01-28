@@ -26,19 +26,20 @@ import javax.swing.text.MaskFormatter;
 import controller.ControleDados;
 
 public class TelaEditarRemedio implements ActionListener {
-	private static JFrame frame;
-	private static JPanel painel;
-	JLabel textDataFinal;
-	JFormattedTextField dataFinal;
-	JComboBox<String> boxEspecie;
+	private JFrame frame;
+	private JPanel painel;
+	private JLabel textDataFinal;
+	private JFormattedTextField dataFinal;
+	private JComboBox<String> boxEspecie;
 
-	String[] dosagens = {"", "mg", "ml", "g", "comprimido(s)", "cápsula(s)", "gota(s)"};
-	String[] frequenciaS = {"", "Uma vez", "Uso contínuo", "Temporário"};
+	private String[] dosagens = {"", "mg", "ml", "g", "comprimido(s)", "cápsula(s)", "gota(s)"};
+	private String[] frequenciaS = {"", "Uma vez", "Uso contínuo", "Temporário"};
 	
-	ControleDados dados = new ControleDados();
+	private ControleDados dados = new ControleDados();
+	private int i;
 	
 	
-	TelaEditarRemedio(ControleDados dados) {
+	TelaEditarRemedio(ControleDados dados, int i) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -47,7 +48,7 @@ public class TelaEditarRemedio implements ActionListener {
 		frame.setVisible(true);
 		
 		this.dados = dados;
-		
+		this.i = i;
 		implementarTemplate();
 		painelRemedio();
 		botaoVoltar();
@@ -217,11 +218,11 @@ public class TelaEditarRemedio implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaRemedio(dados);
+			 new TelaRemedio(dados, i);
 	         frame.dispose();
 		}
 		if ("Confirmar" == e.getActionCommand()) {
-			 new TelaRemedio(dados);
+			 new TelaRemedio(dados, i);
 	         frame.dispose();
 		}		
 	}

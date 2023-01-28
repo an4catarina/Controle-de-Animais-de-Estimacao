@@ -62,7 +62,7 @@ public class ControleVacina {
 		public void verVacina(String nome) {
 			for (int j = 0; j < dados.getQtdVacinas(); j++) {
 				if(dados.getVacinas().get(j).getNomeMedicamento().equals(nome)) {
-					new TelaVacina(dados);
+					new TelaVacina(dados, j);
 				}
 			}
 		}

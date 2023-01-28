@@ -62,7 +62,7 @@ public class ControleRemedio {
 	public void verRemedio(String nome) {
 		for (int j = 0; j < dados.getQtdRemedios(); j++) {
 			if(dados.getRemedios().get(j).getNomeMedicamento().equals(nome)) {
-				new TelaRemedio(dados);
+				new TelaRemedio(dados, j);
 			}
 		}
 	}

@@ -198,7 +198,7 @@ public class TelaCriarPet implements ActionListener {
 		
 	}
 	
-	public void criar() {
+	public void dadosAnimal(JTextField textNome, JComboBox<String> boxEspecie, JTextField textRaca, JComboBox<String> boxGeneros, JTextField textIdade, JComboBox<String> boxPorte) {
 		String nome = textNome.getText();
 		
 		Especie especie = null;
@@ -262,9 +262,10 @@ public class TelaCriarPet implements ActionListener {
 			porte = null;
 			break;
 		}
-		
+			
 		controleAnimal.adicionarAnimal(nome, especie, raca, genero, idade, porte);
-	}
+		
+		} 
 	
 	public static void main(String[] args) {
 		new Inicio();
@@ -278,9 +279,9 @@ public class TelaCriarPet implements ActionListener {
 	         frame.dispose();
 		}
 		else if ("Confirmar" == e.getActionCommand()) {
-			 criar();
-			 JOptionPane.showMessageDialog(null, "Animal cadastrado com sucesso!");
+			 dadosAnimal(textNome, boxEspecie, textRaca, boxGeneros, textIdade, boxPorte);
 			 new TelaListaPets(dados);
+			 JOptionPane.showMessageDialog(null, "Animal cadastrado com sucesso!");
 	         frame.dispose();
 		}
 		
