@@ -15,20 +15,12 @@ public class ControleRemedio {
 		this.dados = dados;
 	}
 
-    public void adicionarRemedio(int i, int nroDosagem ,Dosagem dosagem, Frequencia frequencia, String dataFinal, int qtdVezes, String nomeMedicamento,String data, String anotacoes) {
-    	Remedio remedio = new Remedio(nroDosagem, dosagem, frequencia, dataFinal, qtdVezes, nomeMedicamento, data, anotacoes);
+    public void adicionarRemedio(int i, int nroDosagem ,Dosagem dosagem, Frequencia frequencia, String dataFinal, int qtdVezes, String nomeMedicamento,String data) {
+    	Remedio remedio = new Remedio(nroDosagem, dosagem, frequencia, dataFinal, qtdVezes, nomeMedicamento, data);
     	dados.getAnimais().get(i).cadastrarRemedio(remedio);
     }
-    
-	public void buscarRemedio(String nome) {
-		for (int i = 0; i < dados.getQtdRemedios(); i++) {
-			if(dados.getRemedios().get(i).getNomeMedicamento().equals(nome)) {
-				System.out.println(dados.getRemedios().get(i).getNomeMedicamento());
-			}
-		}
-	}
 	
-    public void editarRemedio(int i, int nroDosagem1 ,Dosagem dosagem1, Frequencia frequencia1, String dataFinal1, int qtdVezes1, String nomeMedicamento1,String data1, String anotacoes1){
+    public void editarRemedio(int i, int nroDosagem1 ,Dosagem dosagem1, Frequencia frequencia1, String dataFinal1, int qtdVezes1, String nomeMedicamento1,String data1){
     	for (int j = 0; j < dados.getAnimais().get(i).getRemedios().size(); j++) {
 			if(dados.getAnimais().get(i).getRemedios().get(j).getNomeMedicamento() != null) {
             	dados.getRemedios().get(j).setNroDosagem(nroDosagem1);
@@ -37,7 +29,6 @@ public class ControleRemedio {
             	dados.getRemedios().get(j).setDataFinal(dataFinal1);
             	dados.getRemedios().get(j).setNomeMedicamento(nomeMedicamento1);
             	dados.getRemedios().get(j).setData(data1);
-            	dados.getRemedios().get(j).setAnotacoes(anotacoes1);
             }
         }
     } 

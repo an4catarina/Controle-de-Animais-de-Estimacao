@@ -10,8 +10,8 @@ public class Remedio extends Medicamento {
 	private int qtdVezes;
 	private String dataFinal;
 
-	public Remedio(int nroDosagem ,Dosagem dosagem, Frequencia frequencia, String dataFinal, int qtdVezes, String nomeMedicamento,String data, String anotacoes) {
-		super(nomeMedicamento, data, anotacoes);
+	public Remedio(int nroDosagem ,Dosagem dosagem, Frequencia frequencia, String dataFinal, int qtdVezes, String nomeMedicamento,String data) {
+		super(nomeMedicamento, data);
 		this.setNroDosagem(nroDosagem);
 		this.dosagem = dosagem;
 		this.frequencia = frequencia;

@@ -17,7 +17,7 @@ public abstract class Medicamento {
 		this.anotacoes = anotacoes;
 	}
 	
-	public Medicamento(String nomeMedicamento, String data, String anotacoes) {
+	public Medicamento(String nomeMedicamento, String data) {
 		this.nomeMedicamento = nomeMedicamento;
 		this.data = data;
 	}

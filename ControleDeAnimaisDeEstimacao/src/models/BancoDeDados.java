@@ -34,7 +34,7 @@ public class BancoDeDados {
 		for(int i = 0; i < 5; i++) {
 			Animal animal = new Animal("Animal" + i, Especie.FELINO, "Raca" + i, Genero.INDEFINIDO, i, Porte.MEDIO, null, null);
 			Vacina vacina = new Vacina("Lote" + i, "Laboraotorio" + i, false, "nome" + i, "data" + i, i, Intervalo.ANOS, "Anotacoes" + i);
-			Remedio remedio = new Remedio(i, Dosagem.G, Frequencia.UMAVEZ, "Data final" + i, i, "Nome" + i, "Data" + i, "Anotacoes" + i);
+			Remedio remedio = new Remedio(i, Dosagem.G, Frequencia.UMAVEZ, "Data final" + i, i, "Nome" + i, "Data" + i);
 			vacinas.add(vacina);
 			animal.setVacinas(vacinas);
 			remedios.add(remedio);

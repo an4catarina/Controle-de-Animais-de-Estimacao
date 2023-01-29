@@ -34,7 +34,6 @@ public class TelaCriarRemedio implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;
 	private JLabel textDataFinal;
-	private String[] intervalo = {"", "Dias", "Meses", "Anos"};
 	private String[] dosagens = {"", "mg", "ml", "g", "comprimido(s)", "cápsula(s)", "gota(s)"};
 	private ControleDados dados = new ControleDados();
 	private ControleRemedio controleRemedio;
@@ -110,7 +109,6 @@ public class TelaCriarRemedio implements ActionListener {
 		datas();
 		botaoConfirmar();
 		qtdDia();
-		anotacoes();
 	}
 	
 	
@@ -124,52 +122,52 @@ public class TelaCriarRemedio implements ActionListener {
 	
 	public void nomeRemedio() {
 		JLabel nomeRemedio = new JLabel("Nome:");
-		nomeRemedio.setBounds(100, 110, 100, 40);
+		nomeRemedio.setBounds(100, 130, 100, 40);
 		nomeRemedio.setFont(new Font("", 0, 18));
 		painel.add(nomeRemedio);
 		
 		textNome = new JTextField();
-		textNome.setBounds(220, 120, 200, 20);
+		textNome.setBounds(220, 150, 200, 20);
 		painel.add(textNome);
 	}
 	
 	public void dosagem() {
 		JLabel dosagem = new JLabel("Dosagem:");
-		dosagem.setBounds(100, 140, 100, 40);
+		dosagem.setBounds(100, 170, 100, 40);
 		dosagem.setFont(new Font("", 0, 18));
 		painel.add(dosagem);
 		
 		textDosagem = new JTextField();
-		textDosagem.setBounds(220, 150, 55, 20);
+		textDosagem.setBounds(220, 180, 55, 20);
 		painel.add(textDosagem);
 		
 		boxDosagem = new JComboBox<Object>(dosagens);
-		boxDosagem.setBounds(275, 150, 145, 20);
+		boxDosagem.setBounds(275, 180, 145, 20);
 		painel.add(boxDosagem);
 	}
 	
 	
 	public void frequencia() {
 		JLabel frequencia = new JLabel("Frequência:");
-		frequencia.setBounds(100, 170, 250, 40);
+		frequencia.setBounds(100, 200, 250, 40);
 		frequencia.setFont(new Font("", 0, 18));
 		painel.add(frequencia);
 		
 		String[] frequenciaS = {"", "Uma vez", "Uso contínuo", "Temporário"};
 		boxFrequencia = new JComboBox<String>(frequenciaS);
-		boxFrequencia.setBounds(220, 180, 200, 20);
+		boxFrequencia.setBounds(220, 210, 200, 20);
 		boxFrequencia.addActionListener(this);
 		painel.add(boxFrequencia);
 	}
 	
 	public void datas() {
 		JLabel textDatainicio = new JLabel("Data:");
-		textDatainicio.setBounds(100, 200, 100, 40);
+		textDatainicio.setBounds(100, 230, 100, 40);
 		textDatainicio.setFont(new Font("", 0, 18));
 		painel.add(textDatainicio);
 		
 		textDataFinal = new JLabel("Data final:");
-		textDataFinal.setBounds(315, 200, 65, 40);
+		textDataFinal.setBounds(315, 230, 65, 40);
 		textDataFinal.setFont(new Font("", 0, 12));
 		painel.add(textDataFinal);
 		
@@ -182,35 +180,24 @@ public class TelaCriarRemedio implements ActionListener {
 		}
 		
 		dataInicio = new JFormattedTextField(maskData);
-		dataInicio.setBounds(220, 210, 88, 20);
+		dataInicio.setBounds(220, 240, 88, 20);
 		painel.add(dataInicio);
 		
 
 		dataFinal = new JFormattedTextField(maskData);
-		dataFinal.setBounds(375, 210, 88, 20);
+		dataFinal.setBounds(375, 240, 88, 20);
 		painel.add(dataFinal);
 	}
 	
 	public void qtdDia() {
 		JLabel qtd = new JLabel("Quantas vezes por dia?");
-		qtd.setBounds(100, 230, 300, 40);
+		qtd.setBounds(100, 260, 300, 40);
 		qtd.setFont(new Font("", 0, 18));
 		painel.add(qtd);
 		
 		num = new JTextField();
-		num.setBounds(320, 240, 40, 20);
+		num.setBounds(320, 270, 40, 20);
 		painel.add(num);
-	}
-	
-	public void anotacoes() {
-		JLabel anot = new JLabel("Anotações:");
-		anot.setBounds(100, 260, 300, 40);
-		anot.setFont(new Font("", 0, 18));
-		painel.add(anot);
-		
-		textAnotacoes = new JTextArea();
-		textAnotacoes.setBounds(200, 270, 250, 100);
-		painel.add(textAnotacoes);
 	}
 	
 	public void botaoConfirmar() {
@@ -271,9 +258,8 @@ public class TelaCriarRemedio implements ActionListener {
 		int qtdVezes = Integer.parseInt(num.getText());
 		String nomeMedicamento = textNome.getText();
 		String dataI = dataInicio.getText();
-		String anotacoes = textAnotacoes.getText();
 		
-		controleRemedio.adicionarRemedio(i, nroDosagem , dosagem, frequencia, dataF, qtdVezes, nomeMedicamento, dataI, anotacoes);
+		controleRemedio.adicionarRemedio(i, nroDosagem , dosagem, frequencia, dataF, qtdVezes, nomeMedicamento, dataI);
 	}
 	
 	public static void main(String[] args) {
