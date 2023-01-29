@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -101,6 +102,7 @@ public class TelaVacina implements ActionListener {
 		texto();
 		botaoEditar();
 		dadosVacina(i);
+		botaoExcluir();
 	}
 	
 	public void dadosVacina(int i) {
@@ -191,8 +193,17 @@ public class TelaVacina implements ActionListener {
 		JButton botaoEditar = new JButton("Editar");
 		botaoEditar.setActionCommand("editar");
 		botaoEditar.addActionListener(this);
-		botaoEditar.setBounds(470, 12, 70, 30);
+		botaoEditar.setBounds(410, 12, 70, 30);
 		painel.add(botaoEditar);
+	}
+	
+	public void botaoExcluir() {
+		JButton botaoExcluir = new JButton("Excluir");
+		botaoExcluir.setActionCommand("excluir");
+		botaoExcluir.addActionListener(this);
+		botaoExcluir.setBounds(475, 12, 70, 30);
+		painel.add(botaoExcluir);
+		
 	}
 	
 	public void texto() {
@@ -213,8 +224,13 @@ public class TelaVacina implements ActionListener {
 		if ("voltar" == e.getActionCommand()) {
 			 new TelaPerfilPet(dados, i);
 	         frame.dispose();
-		} if ("editar" == e.getActionCommand()) {
+		} else if ("editar" == e.getActionCommand()) {
 			new TelaEditarVacina(dados, i, nome);
+			frame.dispose();
+		} else if ("excluir" == e.getActionCommand()) {
+			controleVacina.excluirVacina(nome, i);
+			new TelaPerfilPet(dados, i);
+			JOptionPane.showMessageDialog(null, "Vacina deletada com sucesso");
 			frame.dispose();
 		}
 		

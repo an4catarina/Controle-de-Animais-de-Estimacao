@@ -344,7 +344,7 @@ public class TelaPerfilPet implements ActionListener, ListSelectionListener {
 		} else if ("excluirPet" == e.getActionCommand()) {
 			 controleAnimal.excluirAnimal(i);
 			 new TelaListaPets(dados);
-			 JOptionPane.showMessageDialog(null, "Animal excluído com sucesso");
+			 JOptionPane.showMessageDialog(null, "Animal deletado com sucesso");
 	         frame.dispose();
 		} 
 		

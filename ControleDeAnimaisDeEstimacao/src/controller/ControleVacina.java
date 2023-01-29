@@ -42,8 +42,12 @@ public class ControleVacina {
 		}
 	    	
 	    
-		public void excluirVacina(Vacina vacina, int i) {
-			dados.getAnimais().get(i).excluirVacina(vacina);
+		public void excluirVacina(String nome, int i) {
+			for (int j = 0; j < dados.getAnimais().get(i).getVacinas().size(); j++) {
+				if(dados.getAnimais().get(i).getVacinas().get(j).getNomeMedicamento().equals(nome)) {
+						dados.getAnimais().get(i).excluirVacina(dados.getAnimais().get(i).getVacinas().get(j));
+				}
+			}
 		}
 		
 	    public DefaultListModel<String> getNomeVacina() {
