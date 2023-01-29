@@ -34,7 +34,6 @@ public class TelaRemedio implements ActionListener {
 	private int i;
 	private ControleRemedio controleRemedio;
 	private JLabel lblNome;
-	private JLabel nomeString;
 	private JLabel lblData;
 	private String data;
 	private JLabel lblDataF;
@@ -110,7 +109,7 @@ public class TelaRemedio implements ActionListener {
 			if(dados.getAnimais().get(i).getRemedios().get(j).getNomeMedicamento().equals(nome)) {
 				String nome = dados.getAnimais().get(i).getRemedios().get(j).getNomeMedicamento();
 				
-				nomeString = new JLabel(nome);
+				JLabel nomeString = new JLabel(nome);
 				lblNome = new JLabel("Nome:" + " " + nome);
 				lblNome.setBounds(180, 100, 400, 40);
 				lblNome.setFont(new Font("", Font.BOLD, 22));

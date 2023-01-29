@@ -6,7 +6,6 @@ import enumerate.Dosagem;
 import enumerate.Frequencia;
 import models.Remedio;
 import view.TelaRemedio;
-import view.TelaVacina;
 
 public class ControleRemedio {
 	private ControleDados dados;

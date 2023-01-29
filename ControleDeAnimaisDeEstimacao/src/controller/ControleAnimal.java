@@ -7,6 +7,7 @@ import enumerate.Especie;
 import enumerate.Genero;
 import enumerate.Porte;
 import models.Animal;
+import view.TelaListaPets;
 import view.TelaPerfilPet;
 
 
@@ -38,9 +39,12 @@ public class ControleAnimal {
 	public void buscarAnimal(String string) {
 		String nome = string;
 		for(int i = 0; i < dados.getQtdAnimais(); i++) {
-			if(dados.getAnimais().get(i).getNome().equals(nome) == true) {
+			if(dados.getAnimais().get(i).getNome().equals(nome)) {
 				new TelaPerfilPet(dados, i);
+				break;
 			} else {
+				JOptionPane.showMessageDialog(null, "Animal não encontrado.");
+				new TelaListaPets(dados);
 				break;
 			}
 		}
@@ -72,9 +76,10 @@ public class ControleAnimal {
     
     public DefaultListModel<String> getListaAnimais() {
     	DefaultListModel<String> listaNomesAnimais = new DefaultListModel<String>();
+    	
     	for (int i = 0; i < dados.getQtdAnimais(); i++) {
     		String nome = dados.getAnimais().get(i).getNome();
-    		listaNomesAnimais.add(i, nome);
+    		listaNomesAnimais.addElement(nome);
     	}
     	return listaNomesAnimais;
     }

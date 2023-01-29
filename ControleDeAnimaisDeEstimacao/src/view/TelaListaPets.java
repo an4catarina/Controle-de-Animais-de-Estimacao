@@ -11,14 +11,19 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -26,12 +31,13 @@ import controller.ControleAnimal;
 import controller.ControleDados;
 
 public class TelaListaPets implements ActionListener, ListSelectionListener {
-	private static JFrame frame;
-	private static JPanel painel;
-	JList<String> listaPets; 
+	private JFrame frame;
+	private JPanel painel;
+	private JList<String> listaPets = new JList<String>();
 	private ControleAnimal controleAnimal;
 	private ControleDados dados = new ControleDados();
-	
+	private JTextField barra;
+
 	public TelaListaPets(ControleDados dados) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
@@ -79,10 +85,10 @@ public class TelaListaPets implements ActionListener, ListSelectionListener {
 		texto();
 		listaPets();
 		botaoAdicaoPet();
+		barraPesquisa();
 	}
 	
 	public void listaPets() {
-		listaPets = new JList<String>();
 		listaPets.setModel(controleAnimal.getListaAnimais());
 		listaPets.setBounds(10, 50, 530, 420);
 		listaPets.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -90,9 +96,22 @@ public class TelaListaPets implements ActionListener, ListSelectionListener {
 		painel.add(listaPets);
 	}
 	
+	public void barraPesquisa() {
+		barra = new JTextField();
+		barra.setBounds(80, 13, 250, 30);
+		barra.setColumns(10);
+		painel.add(barra);
+		
+		JButton botaoBusca = new JButton("Buscar");
+		botaoBusca.setBounds(327, 13, 70, 30);
+		painel.add(botaoBusca);
+		botaoBusca.addActionListener(this);
+		botaoBusca.setActionCommand("busca");
+	}
+	
 	public void texto() {
 		JLabel Pets = new JLabel("Pets");
-		Pets.setBounds(20, 13, 250, 20);
+		Pets.setBounds(10, 13, 250, 20);
 		Pets.setFont(new Font("", Font.BOLD, 25));
 		Pets.setForeground(Color.BLACK);
 		painel.add(Pets);
@@ -115,6 +134,9 @@ public class TelaListaPets implements ActionListener, ListSelectionListener {
 	public void actionPerformed(ActionEvent e) {
 		if ("adicionarPet" == e.getActionCommand()) {
 			 new TelaCriarPet();
+	         frame.dispose();
+		} else if ("busca" == e.getActionCommand()) {
+			 controleAnimal.buscarAnimal(barra.getText());
 	         frame.dispose();
 		} 
 	}

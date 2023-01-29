@@ -119,14 +119,6 @@ public class Animal {
 	public void cadastrarRemedio(Remedio remedio) {
 		remedios.add(remedio);
 	}
-
-	public void buscarRemedio(String nome) {
-		for (int i = 0; i < remedios.size(); i++) {
-			if(remedios.get(i).getNomeMedicamento().equals(nome)) {
-				System.out.println(remedios.get(i).getNomeMedicamento());
-			}
-		}
-	}
 	
 	public void excluirRemedio(Remedio remedio) {
 		for (int i = 0; i < remedios.size(); i++) {

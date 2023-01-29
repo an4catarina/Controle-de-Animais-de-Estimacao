@@ -10,8 +10,6 @@ import models.Vacina;
 public class ControleDados {
 	private BancoDeDados dados;
 	private int qtdAnimais = 0;
-	private int qtdVacinas = 0;
-	private int qtdRemedios = 0;
 	
 	public ControleDados(){
 		dados = new BancoDeDados();
@@ -34,15 +32,15 @@ public class ControleDados {
 	}
 	
 	public int getQtdAnimais() {
-		return qtdAnimais = dados.getAnimais().size();
+		return dados.getAnimais().size();
 	}
 	
 	public int getQtdVacinas() {
-		return qtdVacinas = dados.getVacinas().size();
+		return dados.getVacinas().size();
 	}
 	
 	public int getQtdRemedios() {
-		return qtdRemedios = dados.getRemedios().size();
+		return dados.getRemedios().size();
 	}
 	
 	public void setQtdAnimais(int qtdAnimais) {
