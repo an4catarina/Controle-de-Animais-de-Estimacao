@@ -15,18 +15,22 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import controller.ControleDados;
+import controller.ControleRemedio;
 
 public class TelaRemedio implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;
-	ControleDados dados = new ControleDados();
+	private ControleDados dados = new ControleDados();
+	private String nome;
 	private int i;
+	private ControleRemedio controleRemedio;
 	
-	public TelaRemedio(ControleDados dados, int i) {
+	public TelaRemedio(ControleDados dados, int i, String nome) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -35,6 +39,9 @@ public class TelaRemedio implements ActionListener {
 		frame.setVisible(true);
 		
 		this.dados = dados;
+		this.i = i;
+		this.nome = nome;
+		controleRemedio = new ControleRemedio(dados);
 		
 		implementarTemplate();
 		botaoVoltar();
@@ -80,14 +87,24 @@ public class TelaRemedio implements ActionListener {
 	public void implementarElementosRemedio() {
 		texto();
 		botaoEditar();
+		botaoExcluir();
 	}
 	
 	public void botaoEditar() {
 		JButton botaoEditar = new JButton("Editar");
 		botaoEditar.setActionCommand("editar");
 		botaoEditar.addActionListener(this);
-		botaoEditar.setBounds(470, 12, 70, 30);
+		botaoEditar.setBounds(410, 12, 70, 30);
 		painel.add(botaoEditar);
+	}
+	
+	public void botaoExcluir() {
+		JButton botaoExcluir = new JButton("Excluir");
+		botaoExcluir.setActionCommand("excluir");
+		botaoExcluir.addActionListener(this);
+		botaoExcluir.setBounds(475, 12, 70, 30);
+		painel.add(botaoExcluir);
+		
 	}
 	
 	public void texto() {
@@ -108,11 +125,15 @@ public class TelaRemedio implements ActionListener {
 		if ("voltar" == e.getActionCommand()) {
 			 new TelaPerfilPet(dados, i);
 	         frame.dispose();
-		} if ("editar" == e.getActionCommand()) {
-			new TelaEditarRemedio(dados, i);
+		} else if ("editar" == e.getActionCommand()) {
+			new TelaEditarRemedio(dados, i, nome);
+			frame.dispose();
+		} else if ("excluir" == e.getActionCommand()) {
+			controleRemedio.excluirRemedio(nome, i);
+			new TelaPerfilPet(dados, i);
+			JOptionPane.showMessageDialog(null, "Remedio deletado com sucesso");
 			frame.dispose();
 		}
-//		
 	}
 
 }

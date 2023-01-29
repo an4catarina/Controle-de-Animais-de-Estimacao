@@ -338,9 +338,6 @@ public class TelaPerfilPet implements ActionListener, ListSelectionListener {
 		} else if ("criarRemedio" == e.getActionCommand()) {
 			 new TelaCriarRemedio(dados, i);
 	         frame.dispose();
-		} else if ("verRemedio" == e.getActionCommand()) {
-			 new TelaRemedio(dados, i);
-	         frame.dispose();
 		} else if ("excluirPet" == e.getActionCommand()) {
 			 controleAnimal.excluirAnimal(i);
 			 new TelaListaPets(dados);
@@ -358,7 +355,7 @@ public class TelaPerfilPet implements ActionListener, ListSelectionListener {
 			controleVacina.verVacina(listaVacinas.getSelectedValue().toString(), i);
 			frame.dispose();
 		} else if(e.getValueIsAdjusting() && src == listaRemedios) {
-			controleRemedio.verRemedio(listaRemedios.getSelectedValue().toString());
+			controleRemedio.verRemedio(listaRemedios.getSelectedValue().toString(), i);
 			frame.dispose();
 		}
 		

@@ -19,27 +19,39 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
 import controller.ControleDados;
+import controller.ControleRemedio;
+import enumerate.Dosagem;
+import enumerate.Frequencia;
 
 public class TelaEditarRemedio implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;
 	private JLabel textDataFinal;
 	private JFormattedTextField dataFinal;
-	private JComboBox<String> boxEspecie;
+	private JComboBox<String> boxFrequencia;
 
 	private String[] dosagens = {"", "mg", "ml", "g", "comprimido(s)", "cápsula(s)", "gota(s)"};
 	private String[] frequenciaS = {"", "Uma vez", "Uso contínuo", "Temporário"};
 	
 	private ControleDados dados = new ControleDados();
+	private String nome;
+	private ControleRemedio controleRemedio;
 	private int i;
+	private JTextField textNome;
+	private JTextField textDosagem;
+	private JComboBox<String> boxDosagem;
+	private JFormattedTextField dataInicio;
+	private JTextField num;
+	private JTextArea anotacoes;
 	
 	
-	TelaEditarRemedio(ControleDados dados, int i) {
+	TelaEditarRemedio(ControleDados dados, int i, String nome) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -48,7 +60,9 @@ public class TelaEditarRemedio implements ActionListener {
 		frame.setVisible(true);
 		
 		this.dados = dados;
+		controleRemedio = new ControleRemedio(dados);
 		this.i = i;
+		this.nome = nome;
 		implementarTemplate();
 		painelRemedio();
 		botaoVoltar();
@@ -99,6 +113,86 @@ public class TelaEditarRemedio implements ActionListener {
 		botaoConfirmar();
 		qtdDia();
 		anotacoes();
+		dadosRemedio();
+	}
+	
+	public void dadosRemedio() {
+		for (int j = 0; j < dados.getAnimais().get(i).getRemedios().size(); j++) {
+			if(dados.getAnimais().get(i).getRemedios().get(j).getNomeMedicamento().equals(nome)) {
+				
+				textNome = new JTextField(dados.getAnimais().get(i).getRemedios().get(j).getNomeMedicamento());
+				textNome.setBounds(220, 120, 200, 20);
+				painel.add(textNome);
+				
+				textDosagem = new JTextField(Integer.toString(dados.getAnimais().get(i).getRemedios().get(j).getNroDosagem()));
+				textDosagem.setBounds(220, 150, 55, 20);
+				painel.add(textDosagem);
+
+				int index;
+				switch(dados.getAnimais().get(i).getRemedios().get(j).getDosagem()) {
+				case MG:
+					index = 1;
+					break;
+				case ML:
+					index = 2;
+					break;
+				case COMPRIMIDO:
+					index = 3;
+					break;
+				case CAPSULA:
+					index = 4;
+					break;
+				case GOTA:
+					index = 5;
+					break;
+				default:
+					index = 0;
+					break;
+				}
+				boxDosagem = new JComboBox<String>(dosagens);
+				boxDosagem.setSelectedIndex(index);
+				boxDosagem.setBounds(275, 150, 145, 20);
+				painel.add(boxDosagem);
+
+				int indexF;
+				switch(dados.getAnimais().get(i).getRemedios().get(j).getFrequencia()) {
+				case UMAVEZ:
+					indexF = 1;
+					break;
+				case USOCONTINUO:
+					indexF = 2;
+					break;
+				case USOTEMPORARIO:
+					indexF = 3;
+					break;
+				default:
+					indexF = 0;
+					break;
+				}
+				boxFrequencia = new JComboBox<String>(frequenciaS);
+				boxFrequencia.setSelectedIndex(indexF);
+				boxFrequencia.setBounds(220, 180, 200, 20);
+				boxFrequencia.addActionListener(this);
+				painel.add(boxFrequencia);
+				
+				dataInicio = new JFormattedTextField(dados.getAnimais().get(i).getRemedios().get(j).getData());
+				dataInicio.setBounds(220, 210, 88, 20);
+				painel.add(dataInicio);
+				
+
+				dataFinal = new JFormattedTextField(dados.getAnimais().get(i).getRemedios().get(j).getDataFinal());
+				dataFinal.setBounds(375, 210, 88, 20);
+				painel.add(dataFinal);
+				
+				num = new JTextField(Integer.toString(dados.getAnimais().get(i).getRemedios().get(j).getQtdVezes()));
+				num.setBounds(320, 240, 40, 20);
+				painel.add(num);
+				
+				anotacoes = new JTextArea(dados.getAnimais().get(i).getRemedios().get(j).getAnotacoes());
+				anotacoes.setBounds(200, 270, 250, 100);
+				painel.add(anotacoes);
+			}
+		}
 	}
 	
 	
@@ -115,10 +209,6 @@ public class TelaEditarRemedio implements ActionListener {
 		nomeRemedio.setBounds(100, 110, 100, 40);
 		nomeRemedio.setFont(new Font("", 0, 18));
 		painel.add(nomeRemedio);
-		
-		JTextField textNome = new JTextField();
-		textNome.setBounds(220, 120, 200, 20);
-		painel.add(textNome);
 	}
 	
 	public void dosagem() {
@@ -126,14 +216,6 @@ public class TelaEditarRemedio implements ActionListener {
 		dosagem.setBounds(100, 140, 100, 40);
 		dosagem.setFont(new Font("", 0, 18));
 		painel.add(dosagem);
-		
-		JTextField textLote = new JTextField();
-		textLote.setBounds(220, 150, 55, 20);
-		painel.add(textLote);
-		
-		JComboBox<String> boxDosagem = new JComboBox<String>(dosagens);
-		boxDosagem.setBounds(275, 150, 145, 20);
-		painel.add(boxDosagem);
 	}
 	
 	
@@ -142,11 +224,6 @@ public class TelaEditarRemedio implements ActionListener {
 		frequencia.setBounds(100, 170, 250, 40);
 		frequencia.setFont(new Font("", 0, 18));
 		painel.add(frequencia);
-		
-		boxEspecie = new JComboBox<String>(frequenciaS);
-		boxEspecie.setBounds(220, 180, 200, 20);
-		boxEspecie.addActionListener(this);
-		painel.add(boxEspecie);
 	}
 	
 	public void datas() {
@@ -167,15 +244,6 @@ public class TelaEditarRemedio implements ActionListener {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		JFormattedTextField dataInicio = new JFormattedTextField(maskData);
-		dataInicio.setBounds(220, 210, 88, 20);
-		painel.add(dataInicio);
-		
-
-		dataFinal = new JFormattedTextField(maskData);
-		dataFinal.setBounds(375, 210, 88, 20);
-		painel.add(dataFinal);
 	}
 	
 	public void qtdDia() {
@@ -183,10 +251,6 @@ public class TelaEditarRemedio implements ActionListener {
 		qtd.setBounds(100, 230, 300, 40);
 		qtd.setFont(new Font("", 0, 18));
 		painel.add(qtd);
-		
-		JTextField num = new JTextField();
-		num.setBounds(320, 240, 40, 20);
-		painel.add(num);
 	}
 	
 	public void anotacoes() {
@@ -194,10 +258,6 @@ public class TelaEditarRemedio implements ActionListener {
 		anot.setBounds(100, 260, 300, 40);
 		anot.setFont(new Font("", 0, 18));
 		painel.add(anot);
-		
-		JTextField anotacoes = new JTextField();
-		anotacoes.setBounds(200, 270, 250, 100);
-		painel.add(anotacoes);
 	}
 	
 	public void botaoConfirmar() {
@@ -209,20 +269,68 @@ public class TelaEditarRemedio implements ActionListener {
 		
 	}
 	
-	
-	public static void main(String[] args) {
-		new Inicio();
-
+	public void dadosRemedio(JTextField textNome, JTextField textDosagem, JComboBox<Object> boxDosagem, JComboBox<String> boxFrequencia,
+			JFormattedTextField dataInicio,JFormattedTextField dataFinal, JTextField num, JTextArea textAnotacoes) {
+		
+		int nroDosagem = Integer.parseInt(textDosagem.getText());
+		
+		Dosagem dosagem = null;
+		int escolherDosagem = boxDosagem.getSelectedIndex();
+		switch(escolherDosagem) {
+		case 1:
+			dosagem = Dosagem.MG;
+			break;
+		case 2:
+			dosagem = Dosagem.ML;
+			break;
+		case 3:
+			dosagem = Dosagem.G;
+			break;
+		case 4:
+			dosagem = Dosagem.COMPRIMIDO;
+			break;
+		case 5:
+			dosagem = Dosagem.CAPSULA;
+			break;
+		case 6:
+			dosagem = Dosagem.GOTA;
+			break;
+		default:
+			dosagem = null;
+			break;
+		}
+		
+		Frequencia frequencia = null;
+		int escolhaFrequencia = boxFrequencia.getSelectedIndex();
+		switch(escolhaFrequencia) {
+		case 1:
+			frequencia = Frequencia.UMAVEZ;
+			break;
+		case 2:
+			frequencia = Frequencia.USOCONTINUO;
+			break;
+		case 3:
+			frequencia = Frequencia.USOTEMPORARIO;
+			break;
+		}
+		
+		String dataF = dataFinal.getText();
+		int qtdVezes = Integer.parseInt(num.getText());
+		String nomeMedicamento = textNome.getText();
+		String dataI = dataInicio.getText();
+		String anotacoes = textAnotacoes.getText();
+		
+		controleRemedio.editarRemedio(i, nroDosagem , dosagem, frequencia, dataF, qtdVezes, nomeMedicamento, dataI, anotacoes);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaRemedio(dados, i);
+			 new TelaRemedio(dados, i, nome);
 	         frame.dispose();
 		}
 		if ("Confirmar" == e.getActionCommand()) {
-			 new TelaRemedio(dados, i);
+			 new TelaRemedio(dados, i, nome);
 	         frame.dispose();
 		}		
 	}

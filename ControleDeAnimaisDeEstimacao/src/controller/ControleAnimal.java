@@ -27,12 +27,10 @@ public class ControleAnimal {
             }
         }
         if(count >= 1) {
-            System.out.println("Animal já cadastrado!");
             return false;
         } else {
             Animal animal = new Animal(nome, especie, raca, genero, idade, porte, null, null);
             dados.cadastrarAnimal(animal);
-            System.out.println("Animal cadastrado com sucesso!");
             return true;
         }
     }
@@ -43,7 +41,6 @@ public class ControleAnimal {
 			if(dados.getAnimais().get(i).getNome().equals(nome) == true) {
 				new TelaPerfilPet(dados, i);
 			} else {
-				JOptionPane.showMessageDialog(null, "Animal não encontrado."); 
 				break;
 			}
 		}
