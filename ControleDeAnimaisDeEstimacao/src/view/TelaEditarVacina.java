@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.text.ParseException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -15,29 +16,42 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.text.MaskFormatter;
 
 import controller.ControleDados;
+import controller.ControleVacina;
+import enumerate.Intervalo;
 
 public class TelaEditarVacina implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;
+	private String[] intervaloList = {"", "Dias", "Meses", "Anos"};
+	private ControleDados dados = new ControleDados();
+	private ControleVacina controleVacina;
+	private int i;
+	private String nome;
+	private JTextField textNome;
+	private JFormattedTextField textData;
+	private JTextField textLaboratorio;
+	private JTextField textLote;
 	private JRadioButton sim;
 	private JRadioButton nao;
 	private JLabel tempode;
-	private JTextField num;
+	private JTextField intIntervalo;
 	private JComboBox<String> boxIntervalo;
-	private String[] intervalo = {"", "Dias", "Meses", "Anos"};
-	private ControleDados dados = new ControleDados();
-	private int i;
+	private JTextArea textAnotacoes;
 	
 	
-	TelaEditarVacina(ControleDados dados, int i) {
+	TelaEditarVacina(ControleDados dados, int i, String nome) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -46,6 +60,8 @@ public class TelaEditarVacina implements ActionListener {
 		frame.setVisible(true);
 		
 		this.dados = dados;
+		this.nome= nome;
+		controleVacina = new ControleVacina(dados);
 		
 		implementarTemplate();
 		painelVacina();
@@ -98,8 +114,89 @@ public class TelaEditarVacina implements ActionListener {
 		botaoConfirmar();
 		tempode();
 		anotacoes();
+		criarElementosEdicao();
 	}
 	
+	public void criarElementosEdicao() {
+		for (int j = 0; j < dados.getAnimais().get(i).getVacinas().size(); j++) {
+			if(dados.getAnimais().get(i).getVacinas().get(j).getNomeMedicamento().equals(nome)) {
+				textNome = new JTextField(nome);
+				textNome.setBounds(220, 120, 200, 20);
+				painel.add(textNome);
+				
+				MaskFormatter maskData = null;
+				try {
+					maskData = new MaskFormatter("##/##/####");
+					maskData.setPlaceholderCharacter('_');
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				textData = new JFormattedTextField(dados.getAnimais().get(i).getVacinas().get(j).getData());
+				textData.setBounds(220, 162, 88, 20);
+				painel.add(textData);
+				
+				textLaboratorio = new JTextField(dados.getAnimais().get(i).getVacinas().get(j).getLaboratorio());
+				textLaboratorio.setBounds(220, 200, 200, 20);
+				painel.add(textLaboratorio);
+				
+				textLote = new JTextField(dados.getAnimais().get(i).getVacinas().get(j).getLote());
+				textLote.setBounds(220, 238, 200, 20);
+				painel.add(textLote);
+				
+				sim = new JRadioButton("Sim");
+				nao = new JRadioButton("Não");
+				sim.setBounds(300, 278, 55, 20);
+				nao.setBounds(368, 278, 57, 20);
+				painel.add(sim);
+				painel.add(nao);
+				sim.addActionListener(this);
+				nao.addActionListener(this);
+				ButtonGroup opcoes = new ButtonGroup();
+				opcoes.add(nao);
+				opcoes.add(sim);
+				
+				intIntervalo = new JTextField(Integer.toString(dados.getAnimais().get(i).getVacinas().get(j).getPeriodo()));
+				intIntervalo.setBounds(280, 320, 60, 20);
+				intIntervalo.setVisible(false);
+				painel.add(intIntervalo);
+				
+				int index;
+				switch(dados.getAnimais().get(i).getVacinas().get(j).getIntervalo()) {
+				case DIAS:
+					index = 1;
+					break;
+				case MESES:
+					index = 2;
+					break;
+				case ANOS:
+					index = 3;
+					break;
+				default:
+					index = 0;
+					break;
+				}
+				boxIntervalo = new JComboBox<String>(intervaloList);
+				boxIntervalo.setSelectedIndex(index);
+				boxIntervalo.setBounds(340, 320, 90, 20);
+				boxIntervalo.setVisible(false);
+				painel.add(boxIntervalo);
+				
+				if (dados.getAnimais().get(i).getVacinas().get(j).isNecRevacinar() == true) {
+					sim.setSelected(true);
+					intIntervalo.setVisible(true);
+					tempode.setVisible(true);
+					boxIntervalo.setVisible(true);
+				} else if (dados.getAnimais().get(i).getVacinas().get(j).isNecRevacinar() == false) {
+					nao.setSelected(true);
+				}
+				
+				textAnotacoes = new JTextArea(dados.getAnimais().get(i).getVacinas().get(j).getAnotacoes());
+				textAnotacoes.setBounds(200, 350, 250, 80);
+				painel.add(textAnotacoes);
+			}
+		}
+		painel.add(textNome);
+	}
 	
 	public void labelEditarVacina() {
 		JLabel editarVacina = new JLabel("Editar vacina");
@@ -115,11 +212,7 @@ public class TelaEditarVacina implements ActionListener {
 		nomeVacina.setBounds(100, 110, 100, 40);
 		nomeVacina.setFont(new Font("", 0, 18));
 		painel.add(nomeVacina);
-		
-		JTextField textNome = new JTextField();
-		textNome.setBounds(220, 120, 200, 20);
-		painel.add(textNome);
-		
+
 	}
 	
 	public void dataVacina() {
@@ -127,10 +220,6 @@ public class TelaEditarVacina implements ActionListener {
 		data.setBounds(100, 150, 100, 40);
 		data.setFont(new Font("", 0, 18));
 		painel.add(data);
-		
-		JTextField boxVacina = new JTextField();
-		boxVacina.setBounds(220, 162, 200, 20);
-		painel.add(boxVacina);
 	}
 
 	public void laboratorio() {
@@ -138,11 +227,6 @@ public class TelaEditarVacina implements ActionListener {
 		laboratorio.setBounds(100, 190, 130, 40);
 		laboratorio.setFont(new Font("", 0, 18));
 		painel.add(laboratorio);
-		
-		JTextField textLaboratorio = new JTextField();
-		textLaboratorio.setBounds(220, 200, 200, 20);
-		painel.add(textLaboratorio);
-		
 	}
 	
 	public void lote() {
@@ -150,11 +234,7 @@ public class TelaEditarVacina implements ActionListener {
 		lote.setBounds(100, 230, 100, 40);
 		lote.setFont(new Font("", 0, 18));
 		painel.add(lote);
-		
-		JTextField textLote = new JTextField();
-		textLote.setBounds(220, 238, 200, 20);
-		painel.add(textLote);
-		
+
 	}
 	
 	
@@ -163,22 +243,6 @@ public class TelaEditarVacina implements ActionListener {
 		necRevacinar.setBounds(100, 270, 250, 40);
 		necRevacinar.setFont(new Font("", 0, 18));
 		painel.add(necRevacinar);
-		
-		sim = new JRadioButton("Sim");
-		nao = new JRadioButton("Não");
-		sim.setBounds(300, 278, 55, 20);
-		nao.setBounds(368, 278, 57, 20);
-		painel.add(sim);
-		painel.add(nao);
-		
-		sim.addActionListener(this);
-		nao.addActionListener(this);
-		
-		ButtonGroup opcoes = new ButtonGroup();
-		opcoes.add(nao);
-		opcoes.add(sim);
-	
-		
 	}
 	
 	public void tempode() {
@@ -187,39 +251,62 @@ public class TelaEditarVacina implements ActionListener {
 		tempode.setFont(new Font("", 0, 18));
 		tempode.setVisible(false);
 		painel.add(tempode);
-		
-	
-		num = new JTextField();
-		num.setBounds(280, 320, 60, 20);
-		num.setVisible(false);
-		painel.add(num);
-		
-		boxIntervalo = new JComboBox(intervalo);
-		boxIntervalo.setBounds(340, 320, 90, 20);
-		boxIntervalo.setVisible(false);
-		painel.add(boxIntervalo);
 	}
 	
 	public void anotacoes() {
 		JLabel anot = new JLabel("Anotações:");
-		anot.setBounds(100, 300, 300, 40);
+		anot.setBounds(100, 340, 300, 40);
 		anot.setFont(new Font("", 0, 18));
 		painel.add(anot);
-		
-		JTextField anotacoes = new JTextField();
-		anotacoes.setBounds(200, 310, 250, 84);
-		painel.add(anotacoes);
 	}
 	
 	public void botaoConfirmar() {
 		JButton botao = new JButton("Confirmar");
-		botao.setBounds(230, 400, 100, 40);
+		botao.setBounds(230, 435, 100, 40);
 		botao.setActionCommand("Confirmar");
 		botao.addActionListener(this);
 		painel.add(botao);
 		
 	}
 	
+	public void dadosVacina(JTextField textNome, JFormattedTextField textData, JTextField textLaboratorio, JTextField textLote,
+			JRadioButton sim, JRadioButton nao, JTextField intIntervalo, JComboBox<String> boxIntervalo, JTextArea textAnotacoes) {
+
+		String nomeMedicamento = textNome.getText();
+		String data = textData.getText();
+		String laboratorio = textLaboratorio.getText();
+		String lote = textLote.getText();
+		boolean necRevacinar = sim.isSelected();
+		int periodo = 0;
+		Intervalo tempoIntervalo = null;
+		if (necRevacinar == true) {
+			periodo = Integer.parseInt(intIntervalo.getText());
+
+			int escolhaIntervalo = boxIntervalo.getSelectedIndex();
+			switch(escolhaIntervalo) {
+			case 1:
+				tempoIntervalo = Intervalo.DIAS;
+				break;
+			case 2:
+				tempoIntervalo = Intervalo.MESES;
+				break;
+			case 3:
+				tempoIntervalo = Intervalo.ANOS;
+				break;
+			default:
+				tempoIntervalo = null;
+				break;
+			}
+		} else {
+			periodo = 0;
+			tempoIntervalo = null;
+		}
+		
+		String anotacoes = textAnotacoes.getText();
+		
+		controleVacina.editarVacina(i, lote, laboratorio, necRevacinar, nomeMedicamento, data, periodo, tempoIntervalo, anotacoes);
+		
+	}
 	
 	public static void main(String[] args) {
 		new Inicio();
@@ -229,21 +316,23 @@ public class TelaEditarVacina implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("voltar" == e.getActionCommand()) {
-			 new TelaVacina(dados, i);
+			 new TelaVacina(dados, i, nome);
 	         frame.dispose();
 		}
 		if ("Confirmar" == e.getActionCommand()) {
-			 new TelaVacina(dados, i);
+			 dadosVacina(textNome, textData, textLaboratorio, textLote, sim, nao, intIntervalo, boxIntervalo, textAnotacoes);
+			 new TelaVacina(dados, i, nome);
+			 JOptionPane.showMessageDialog(null, "Vacina alterada com sucesso!");
 	         frame.dispose();
 		} 
 		if (sim.isSelected() == true) {
 			tempode.setVisible(true);
-			num.setVisible(true);
+			intIntervalo.setVisible(true);
 			boxIntervalo.setVisible(true);
 		}
 		if (sim.isSelected() == false) {
 			tempode.setVisible(false);
-			num.setVisible(false);
+			intIntervalo.setVisible(false);
 			boxIntervalo.setVisible(false);
 		} 
 		

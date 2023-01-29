@@ -1,9 +1,7 @@
 package controller;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import enumerate.Especie;
 import enumerate.Genero;

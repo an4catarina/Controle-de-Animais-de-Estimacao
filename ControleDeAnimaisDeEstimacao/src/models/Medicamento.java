@@ -1,7 +1,5 @@
 package models;
 
-import java.util.Date;
-
 import enumerate.Intervalo;
 
 public abstract class Medicamento {

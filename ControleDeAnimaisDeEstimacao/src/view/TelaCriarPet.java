@@ -240,8 +240,7 @@ public class TelaCriarPet implements ActionListener {
 			break;
 		}
 		
-		String stringIdade = textIdade.getText();
-		int idade = Integer.parseInt(stringIdade);
+		int idade = Integer.parseInt(textIdade.getText());
 		
 		Porte porte = null;
 		int escolhaPorte = boxPorte.getSelectedIndex();

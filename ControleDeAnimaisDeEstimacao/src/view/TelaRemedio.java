@@ -105,13 +105,13 @@ public class TelaRemedio implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		if ("voltar" == e.getActionCommand()) {
-//			 new TelaPerfilPet(dados);
-//	         frame.dispose();
-//		} if ("editar" == e.getActionCommand()) {
-//			new TelaEditarRemedio(dados);
-//			frame.dispose();
-//		}
+		if ("voltar" == e.getActionCommand()) {
+			 new TelaPerfilPet(dados, i);
+	         frame.dispose();
+		} if ("editar" == e.getActionCommand()) {
+			new TelaEditarRemedio(dados, i);
+			frame.dispose();
+		}
 //		
 	}
 

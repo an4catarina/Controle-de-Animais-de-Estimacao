@@ -4,15 +4,14 @@ import javax.swing.DefaultListModel;
 
 import enumerate.Dosagem;
 import enumerate.Frequencia;
-import models.BancoDeDados;
 import models.Remedio;
 import view.TelaRemedio;
 
 public class ControleRemedio {
 	private ControleDados dados;
 	
-	public ControleRemedio() {
-		
+	public ControleRemedio(ControleDados dados) {
+		this.dados = dados;
 	}
 
     public void adicionarRemedio(int i, int nroDosagem ,Dosagem dosagem, Frequencia frequencia, String dataFinal, int qtdVezes, String nomeMedicamento,String data, String anotacoes) {

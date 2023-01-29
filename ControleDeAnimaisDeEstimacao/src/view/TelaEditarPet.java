@@ -338,7 +338,7 @@ public class TelaEditarPet implements ActionListener {
 		else if ("Confirmar" == e.getActionCommand()) {
 			 dadosAnimal(textNome, boxEspecie, textRaca, boxGeneros, textIdade, boxPorte);
 			 new TelaPerfilPet(dados, i);
-			 JOptionPane.showMessageDialog(null, "Animal editado com sucesso!");
+			 JOptionPane.showMessageDialog(null, "Animal alterado com sucesso!");
 	         frame.dispose();
 		}
 	}

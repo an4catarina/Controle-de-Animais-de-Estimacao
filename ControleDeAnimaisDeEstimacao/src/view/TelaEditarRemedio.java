@@ -131,7 +131,7 @@ public class TelaEditarRemedio implements ActionListener {
 		textLote.setBounds(220, 150, 55, 20);
 		painel.add(textLote);
 		
-		JComboBox boxDosagem = new JComboBox(dosagens);
+		JComboBox<String> boxDosagem = new JComboBox<String>(dosagens);
 		boxDosagem.setBounds(275, 150, 145, 20);
 		painel.add(boxDosagem);
 	}
@@ -143,7 +143,7 @@ public class TelaEditarRemedio implements ActionListener {
 		frequencia.setFont(new Font("", 0, 18));
 		painel.add(frequencia);
 		
-		boxEspecie = new JComboBox(frequenciaS);
+		boxEspecie = new JComboBox<String>(frequenciaS);
 		boxEspecie.setBounds(220, 180, 200, 20);
 		boxEspecie.addActionListener(this);
 		painel.add(boxEspecie);

@@ -18,7 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import controller.ControleAnimal;
 import controller.ControleDados;
@@ -28,11 +31,11 @@ import enumerate.Especie;
 import enumerate.Genero;
 import enumerate.Porte;
 
-public class TelaPerfilPet implements ActionListener {
-	JFrame frame = new JFrame();
-	private static JPanel painelPet;
-	private static JPanel painelVacinas;
-	private static JPanel painelRemedios;
+public class TelaPerfilPet implements ActionListener, ListSelectionListener {
+	private JFrame frame = new JFrame();
+	private JPanel painelPet;
+	private JPanel painelVacinas;
+	private JPanel painelRemedios;
 	private ControleVacina controleVacina;
 	private ControleRemedio controleRemedio;
 	private ControleAnimal controleAnimal;
@@ -44,6 +47,8 @@ public class TelaPerfilPet implements ActionListener {
 	private String generoS;
 	private int idade;
 	private String porteS;
+	private JList<String> listaVacinas;
+	private JList<String> listaRemedios;
 
 	public TelaPerfilPet(ControleDados dados, int i) {
 		frame = new JFrame("My Pet Care");
@@ -55,8 +60,8 @@ public class TelaPerfilPet implements ActionListener {
 		
 		this.i = i;
 		this.dados = dados;
-		controleVacina = new ControleVacina();
-		controleRemedio = new ControleRemedio();
+		controleVacina = new ControleVacina(dados);
+		controleRemedio = new ControleRemedio(dados);
 		controleAnimal = new ControleAnimal(dados);
 		
 		implementarTemplate();
@@ -124,7 +129,7 @@ public class TelaPerfilPet implements ActionListener {
 		labelNome.setFont(new Font("", Font.BOLD, 20));
 		painelPet.add(labelNome);
 		JLabel nomeString = new JLabel(nome);
-		nomeString.setBounds(160, 70, 300, 40);
+		nomeString.setBounds(150, 70, 300, 40);
 		nomeString.setFont(new Font("", Font.PLAIN, 20));
 		painelPet.add(nomeString);
 
@@ -146,7 +151,7 @@ public class TelaPerfilPet implements ActionListener {
 		labelEspecie.setFont(new Font("", Font.BOLD, 20));
 		painelPet.add(labelEspecie);
 		JLabel especieString = new JLabel(especieS);
-		especieString.setBounds(160, 110, 300, 40);
+		especieString.setBounds(150, 110, 300, 40);
 		especieString.setFont(new Font("", Font.PLAIN, 20));
 		painelPet.add(especieString);
 		
@@ -156,7 +161,7 @@ public class TelaPerfilPet implements ActionListener {
 		labelRaca.setFont(new Font("", Font.BOLD, 20));
 		painelPet.add(labelRaca);
 		JLabel racaString = new JLabel(raca);
-		racaString.setBounds(160, 150, 300, 40);
+		racaString.setBounds(150, 150, 300, 40);
 		racaString.setFont(new Font("", Font.PLAIN, 20));
 		painelPet.add(racaString);
 		
@@ -176,7 +181,7 @@ public class TelaPerfilPet implements ActionListener {
 		labelGenero.setFont(new Font("", Font.BOLD, 20));
 		painelPet.add(labelGenero);
 		JLabel generoString = new JLabel(generoS);
-		generoString.setBounds(380, 70, 300, 40);
+		generoString.setBounds(370, 70, 300, 40);
 		generoString.setFont(new Font("", Font.PLAIN, 20));
 		painelPet.add(generoString);
 		
@@ -186,7 +191,7 @@ public class TelaPerfilPet implements ActionListener {
 		labelIdade.setFont(new Font("", Font.BOLD, 20));
 		painelPet.add(labelIdade);
 		JLabel idadeString = new JLabel(idade + " anos");
-		idadeString.setBounds(380, 110, 300, 40);
+		idadeString.setBounds(370, 110, 300, 40);
 		idadeString.setFont(new Font("", Font.PLAIN, 20));
 		painelPet.add(idadeString);
 		
@@ -207,7 +212,7 @@ public class TelaPerfilPet implements ActionListener {
 		labelPorte.setFont(new Font("", Font.BOLD, 20));
 		painelPet.add(labelPorte);
 		JLabel porteString = new JLabel(porteS);
-		porteString.setBounds(380, 150, 300, 40);
+		porteString.setBounds(370, 150, 300, 40);
 		porteString.setFont(new Font("", Font.PLAIN, 20));
 		painelPet.add(porteString);
 				
@@ -244,7 +249,6 @@ public class TelaPerfilPet implements ActionListener {
 	public void implementarElementosVacinas() {
 		textoVacinas();
 		botaoCriarVacina();
-		botaoExcluirVacina();
 		listaVacinas();
 	}
 	
@@ -260,20 +264,17 @@ public class TelaPerfilPet implements ActionListener {
 		JButton botaoCriarVacina = new JButton("Criar");
 		botaoCriarVacina.setActionCommand("criarVacina");
 		botaoCriarVacina.addActionListener(this);
-		botaoCriarVacina.setBounds(140, 11, 70, 30);
+		botaoCriarVacina.setBounds(195, 11, 70, 30);
 		painelVacinas.add(botaoCriarVacina);
-	}
-
-	public void botaoExcluirVacina() {
-		JButton botao = new JButton("Excluir");
-		botao.setBounds(200, 11, 70, 30);
-		painelVacinas.add(botao);	
 	}
 	
 	public void listaVacinas() {
-		JList<String> vacinas = new JList<String>();
-		vacinas.setBounds(10, 50, 250, 170);
-		painelVacinas.add(vacinas);
+		listaVacinas = new JList<String>();
+		listaVacinas.setModel(controleVacina.getNomeVacina());
+		listaVacinas.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		listaVacinas.setBounds(10, 50, 250, 170);
+		painelVacinas.add(listaVacinas);
+		listaVacinas.addListSelectionListener(this);
 	}
 	
 	public void painelRemedios() {
@@ -290,7 +291,6 @@ public class TelaPerfilPet implements ActionListener {
 	public void implementarElementosRemedios() {
 		botaoCriarRemedio();
 		textoRemedios();
-		botaoExcluirRemedio();
 		listaRemedios();
 	}
 	
@@ -307,21 +307,17 @@ public class TelaPerfilPet implements ActionListener {
 		JButton botaoCriarRemedio = new JButton("Criar");
 		botaoCriarRemedio.setActionCommand("criarRemedio");
 		botaoCriarRemedio.addActionListener(this);
-		botaoCriarRemedio.setBounds(140, 11, 70, 30);
+		botaoCriarRemedio.setBounds(195, 11, 70, 30);
 		painelRemedios.add(botaoCriarRemedio);
 		
 	}
-
-	public void botaoExcluirRemedio() {
-		JButton botao = new JButton("Excluir");
-		botao.setBounds(200, 11, 70, 30);
-		painelRemedios.add(botao);	
-	}
 	
 	public void listaRemedios() {
-		JList<String> remedios = new JList<String>();
-		remedios.setBounds(10, 50, 250, 170);
-		painelRemedios.add(remedios);
+		listaRemedios = new JList<String>();
+		listaRemedios.setModel(controleRemedio.getNomeRemedio());
+		listaRemedios.setBounds(10, 50, 250, 170);
+		painelRemedios.add(listaRemedios);
+		listaRemedios.addListSelectionListener(this);
 	}
 	
 	public static void main(String[] args) {
@@ -337,16 +333,13 @@ public class TelaPerfilPet implements ActionListener {
 			 new TelaEditarPet(dados, i);
 	         frame.dispose();
 		} else if ("criarVacina" == e.getActionCommand()) {
-			 new TelaCriarVacina(dados);
+			 new TelaCriarVacina(dados, i);
 	         frame.dispose();
 		} else if ("criarRemedio" == e.getActionCommand()) {
-			 new TelaCriarRemedio(dados);
+			 new TelaCriarRemedio(dados, i);
 	         frame.dispose();
 		} else if ("verRemedio" == e.getActionCommand()) {
 			 new TelaRemedio(dados, i);
-	         frame.dispose();
-		} else if ("verVacina" == e.getActionCommand()) {
-			 new TelaVacina(dados, i);
 	         frame.dispose();
 		} else if ("excluirPet" == e.getActionCommand()) {
 			 controleAnimal.excluirAnimal(i);
@@ -354,6 +347,20 @@ public class TelaPerfilPet implements ActionListener {
 			 JOptionPane.showMessageDialog(null, "Animal excluído com sucesso");
 	         frame.dispose();
 		} 
+		
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		Object src = e.getSource();
+		
+		if(e.getValueIsAdjusting() && src == listaVacinas) {
+			controleVacina.verVacina(listaVacinas.getSelectedValue().toString(), i);
+			frame.dispose();
+		} else if(e.getValueIsAdjusting() && src == listaRemedios) {
+			controleRemedio.verRemedio(listaRemedios.getSelectedValue().toString());
+			frame.dispose();
+		}
 		
 	}
 

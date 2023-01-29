@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.text.ParseException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -15,29 +16,41 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.text.MaskFormatter;
 
 import controller.ControleDados;
+import controller.ControleVacina;
+import enumerate.Intervalo;
 
 public class TelaCriarVacina implements ActionListener {
-	private static JFrame frame;
-	private static JPanel painel;
-	private static JRadioButton sim;
-	private static JRadioButton nao;
-	JLabel tempode;
-	JTextField num;
-	JComboBox<String> boxIntervalo;
-	String[] intervalo = {"", "Dias", "Meses", "Anos"};
-	ControleDados dados = new ControleDados();
+	private JFrame frame;
+	private JPanel painel;
+	private String[] intervaloList = {"", "Dias", "Meses", "Anos"};
+	private ControleDados dados = new ControleDados();
+	private ControleVacina controleVacina;
+	private int i;
+	private JTextField textNome;
+	private JFormattedTextField textData;
+	private JTextField textLaboratorio;
+	private JTextField textLote;
+	private JRadioButton sim;
+	private JRadioButton nao;
+	private JLabel tempode;
+	private JTextField intIntervalo;
+	private JComboBox<String> boxIntervalo;
+	private JTextArea textAnotacoes;
 	
 	
-	TelaCriarVacina(ControleDados dados) {
+	TelaCriarVacina(ControleDados dados, int i) {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
 		frame.setResizable(false);
@@ -46,7 +59,7 @@ public class TelaCriarVacina implements ActionListener {
 		frame.setVisible(true);
 		
 		this.dados = dados;
-		
+		controleVacina = new ControleVacina(dados);
 		implementarTemplate();
 		painelVacina();
 		botaoVoltar();
@@ -116,7 +129,7 @@ public class TelaCriarVacina implements ActionListener {
 		nomeVacina.setFont(new Font("", 0, 18));
 		painel.add(nomeVacina);
 		
-		JTextField textNome = new JTextField();
+		textNome = new JTextField();
 		textNome.setBounds(220, 120, 200, 20);
 		painel.add(textNome);
 		
@@ -129,10 +142,17 @@ public class TelaCriarVacina implements ActionListener {
 		data.setFont(new Font("", 0, 18));
 		painel.add(data);
 		
-		JTextField boxVacina = new JTextField();
-		boxVacina.setBounds(220, 120, 200, 20);
-		boxVacina.setBounds(220, 162, 200, 20);
-		painel.add(boxVacina);
+		MaskFormatter maskData = null;
+		try {
+			maskData = new MaskFormatter("##/##/####");
+			maskData.setPlaceholderCharacter('_');
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		textData = new JFormattedTextField(maskData);
+		textData.setBounds(220, 162, 88, 20);
+		painel.add(textData);
 	}
 
 	public void laboratorio() {
@@ -142,7 +162,7 @@ public class TelaCriarVacina implements ActionListener {
 		laboratorio.setFont(new Font("", 0, 18));
 		painel.add(laboratorio);
 		
-		JTextField textLaboratorio = new JTextField();
+		textLaboratorio = new JTextField();
 		textLaboratorio.setBounds(220, 200, 200, 20);
 		painel.add(textLaboratorio);
 		
@@ -155,7 +175,7 @@ public class TelaCriarVacina implements ActionListener {
 		lote.setFont(new Font("", 0, 18));
 		painel.add(lote);
 		
-		JTextField textLote = new JTextField();
+		textLote = new JTextField();
 		textLote.setBounds(220, 238, 200, 20);
 		painel.add(textLote);
 		
@@ -194,12 +214,12 @@ public class TelaCriarVacina implements ActionListener {
 		painel.add(tempode);
 		
 	
-		num = new JTextField();
-		num.setBounds(280, 320, 60, 20);
-		num.setVisible(false);
-		painel.add(num);
+		intIntervalo = new JTextField();
+		intIntervalo.setBounds(280, 320, 60, 20);
+		intIntervalo.setVisible(false);
+		painel.add(intIntervalo);
 		
-		boxIntervalo = new JComboBox(intervalo);
+		boxIntervalo = new JComboBox<String>(intervaloList);
 		boxIntervalo.setBounds(340, 320, 90, 20);
 		boxIntervalo.setVisible(false);
 		painel.add(boxIntervalo);
@@ -207,43 +227,84 @@ public class TelaCriarVacina implements ActionListener {
 	
 	public void anotacoes() {
 		JLabel anot = new JLabel("Anotações:");
-		anot.setBounds(100, 300, 300, 40);
+		anot.setBounds(100, 340, 300, 40);
 		anot.setFont(new Font("", 0, 18));
 		painel.add(anot);
 		
-		JTextField anotacoes = new JTextField();
-		anotacoes.setBounds(200, 310, 250, 84);
-		painel.add(anotacoes);
+		textAnotacoes = new JTextArea();
+		textAnotacoes.setBounds(200, 350, 250, 80);
+		painel.add(textAnotacoes);
 	}
 	
 	public void botaoConfirmar() {
 		JButton botao = new JButton("Confirmar");
-		botao.setBounds(230, 400, 100, 40);
+		botao.setBounds(230, 435, 100, 40);
 		botao.setActionCommand("Confirmar");
 		botao.addActionListener(this);
 		painel.add(botao);
 		
 	}
 	
+	public void dadosVacina(JTextField textNome, JFormattedTextField textData, JTextField textLaboratorio, JTextField textLote,
+			JRadioButton sim, JRadioButton nao, JTextField intIntervalo, JComboBox<String> boxIntervalo, JTextArea textAnotacoes) {
+		
+		String nomeMedicamento = textNome.getText();
+		String data = textData.getText();
+		String laboratorio = textLaboratorio.getText();
+		String lote = textLote.getText();
+		boolean necRevacinar = sim.isSelected();
+		int periodo = 0;
+		Intervalo tempoIntervalo = null;
+		if (necRevacinar == true) {
+			periodo = Integer.parseInt(intIntervalo.getText());
+
+			int escolhaIntervalo = boxIntervalo.getSelectedIndex();
+			switch(escolhaIntervalo) {
+			case 1:
+				tempoIntervalo = Intervalo.DIAS;
+				break;
+			case 2:
+				tempoIntervalo = Intervalo.MESES;
+				break;
+			case 3:
+				tempoIntervalo = Intervalo.ANOS;
+				break;
+			default:
+				tempoIntervalo = null;
+				break;
+			}
+		} else {
+			periodo = 0;
+			tempoIntervalo = null;
+		}
+		
+		String anotacoes = textAnotacoes.getText();
+		
+		controleVacina.adicionarVacnina(i, lote, laboratorio, necRevacinar, nomeMedicamento, data, periodo, tempoIntervalo, anotacoes);
+		
+	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		if ("voltar" == e.getActionCommand()) {
-//			 new TelaPerfilPet(dados);
-//	         frame.dispose();
-//		}
-//		if ("Confirmar" == e.getActionCommand()) {
-//			 new TelaPerfilPet(dados);
-//	         frame.dispose();
-//		} 
+		if ("voltar" == e.getActionCommand()) {
+			 new TelaPerfilPet(dados, i);
+	         frame.dispose();
+		}
+		if ("Confirmar" == e.getActionCommand()) {
+			 dadosVacina(textNome, textData, textLaboratorio, textLote, sim, nao, intIntervalo, boxIntervalo, textAnotacoes);
+			 new TelaPerfilPet(dados, i);
+			 JOptionPane.showMessageDialog(null, "Vacina cadastrada com sucesso!");
+	         frame.dispose();
+		} 
 		if (sim.isSelected() == true) {
 			tempode.setVisible(true);
-			num.setVisible(true);
+			intIntervalo.setVisible(true);
 			boxIntervalo.setVisible(true);
 		}
 		if (sim.isSelected() == false) {
 			tempode.setVisible(false);
-			num.setVisible(false);
+			intIntervalo.setVisible(false);
 			boxIntervalo.setVisible(false);
 		} 
 		
