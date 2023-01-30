@@ -30,6 +30,9 @@ import javax.swing.event.ListSelectionListener;
 import controller.ControleAnimal;
 import controller.ControleDados;
 
+/*
+ * tela com a lista de pets
+ */
 public class TelaListaPets implements ActionListener, ListSelectionListener {
 	private JFrame frame;
 	private JPanel painel;

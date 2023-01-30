@@ -1,5 +1,10 @@
 package enumerate;
-
+/**
+ * enumerador no qual define as dosagens
+ * 
+ * @author catarina
+ *
+ */
 public enum Dosagem {
 	MG("mg"),
 	ML("ml"),

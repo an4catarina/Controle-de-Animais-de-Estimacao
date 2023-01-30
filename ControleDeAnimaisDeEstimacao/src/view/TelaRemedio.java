@@ -26,6 +26,12 @@ import enumerate.Frequencia;
 import enumerate.Intervalo;
 import enumerate.Porte;
 
+/**
+ * tela de remédio
+ * 
+ * @author catarina
+ *
+ */
 public class TelaRemedio implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;

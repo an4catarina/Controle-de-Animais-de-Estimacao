@@ -7,6 +7,11 @@ import models.BancoDeDados;
 import models.Remedio;
 import models.Vacina;
 
+/**
+ * classe responsável pelo controle de dados
+ * @author catarina
+ *
+ */
 public class ControleDados {
 	private BancoDeDados dados;
 	private int qtdAnimais = 0;
@@ -47,6 +52,11 @@ public class ControleDados {
 		this.qtdAnimais = qtdAnimais;
 	}
 	
+	/**
+	 * método responsável pelo cadastro de um animal no banco de dados
+	 * 
+	 * @param animal
+	 */
 	public void cadastrarAnimal(Animal animal) {
 		dados.getAnimais().add(animal);
 	}

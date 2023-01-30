@@ -6,6 +6,18 @@ import enumerate.Especie;
 import enumerate.Genero;
 import enumerate.Porte;
 
+/**
+ * classe responsável por criar o Animal;
+ * 
+ * @param nome
+ * @param especie
+ * @param raca
+ * @param genero
+ * @param idade
+ * @param porte
+ * @param vacinas
+ * @param remedios
+ */
 public class Animal {
 	private String nome;
 	private Especie especie;
@@ -15,10 +27,6 @@ public class Animal {
 	private Porte porte;
 	private ArrayList<Vacina> vacinas;
 	private ArrayList<Remedio> remedios;
-	
-	public Animal() {
-		
-	}
 	
 	public Animal(String nome, Especie especie, String raca, Genero genero, int idade, Porte porte, ArrayList<Vacina> vacinas, ArrayList<Remedio> remedios) {
 		super();
@@ -96,18 +104,11 @@ public class Animal {
 		this.remedios = remedios;
 	}
 
-	public void cadastrarVacina(Vacina vacina) {
-		vacinas.add(vacina);
-	}
-
-	public void buscarVacina(String nome) {
-		for (int i = 0; i < vacinas.size(); i++) {
-			if(vacinas.get(i).getNomeMedicamento().equals(nome)) {
-				System.out.println(vacinas.get(i).getNomeMedicamento());
-			}
-		}
-	}
-	
+	/**
+	 * método responsável por excluir a vacina associada ao animal;
+	 * 
+	 * @param vacina
+	 */
 	public void excluirVacina(Vacina vacina) {
 		for (int i = 0; i < vacinas.size(); i++) {
 			if(vacinas.get(i).equals(vacina)) {
@@ -116,10 +117,10 @@ public class Animal {
 		}
 	}
 	
-	public void cadastrarRemedio(Remedio remedio) {
-		remedios.add(remedio);
-	}
-	
+	/**
+	 * método responsável por excluir o remédio associado ao animal
+	 * @param remedio
+	 */
 	public void excluirRemedio(Remedio remedio) {
 		for (int i = 0; i < remedios.size(); i++) {
 			if(remedios.get(i).equals(remedio)) {

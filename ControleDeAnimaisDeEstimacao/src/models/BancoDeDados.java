@@ -9,6 +9,12 @@ import enumerate.Genero;
 import enumerate.Intervalo;
 import enumerate.Porte;
 
+/**
+ * classe responsável pela simulação do banco de dados
+ * @author catarina
+ *
+ */
+
 public class BancoDeDados {
 	private ArrayList<Vacina> vacinas = new ArrayList<Vacina>();
 	private ArrayList<Remedio> remedios = new ArrayList<Remedio>();
@@ -30,6 +36,9 @@ public class BancoDeDados {
 		return animais;
 	}
 	
+	/**
+	 * método responsável pelo preenchimento de dados aleatórios no banco;
+	 */
 	public void preencherDados() {
 		for(int i = 0; i < 5; i++) {
 			Animal animal = new Animal("Animal" + i, Especie.FELINO, "Raca" + i, Genero.INDEFINIDO, i, Porte.MEDIO, null, null);

@@ -26,7 +26,10 @@ import controller.ControleDados;
 import enumerate.Especie;
 import enumerate.Genero;
 import enumerate.Porte;
-
+/** 
+ * tela responsável pela criação do pet
+ * 
+ */
 public class TelaCriarPet implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;
@@ -38,7 +41,7 @@ public class TelaCriarPet implements ActionListener {
 	private JComboBox<String> boxPorte;
 	private ControleAnimal controleAnimal;
 	private ControleDados dados;
-	
+
 	TelaCriarPet() {
 		frame = new JFrame("My Pet Care");
 		frame.setSize(600, 700);
@@ -53,6 +56,10 @@ public class TelaCriarPet implements ActionListener {
 		painelPets();
 		botaoVoltar();
 	}
+	
+	/**
+	 * implementação imagem de fundo
+	 */
 	public void implementarTemplate() {
 		
 		try {
@@ -70,7 +77,9 @@ public class TelaCriarPet implements ActionListener {
 		}
 	}
 	
-	
+	/**
+	 * botao voltar 
+	 */
 	public void botaoVoltar() {
 		JButton botao = new JButton("Voltar");
 		botao.setActionCommand("voltar");
@@ -78,7 +87,9 @@ public class TelaCriarPet implements ActionListener {
 		botao.setBounds(500, 12, 70, 30);
 		frame.add(botao);
 	}
-	
+	/**
+	 * painel com os elementos relacionados ao pet
+	 */
 	public void painelPets() {
 		painel = new JPanel();
 		Border blackline = BorderFactory.createLineBorder(Color.black);
@@ -89,7 +100,9 @@ public class TelaCriarPet implements ActionListener {
 		frame.add(painel);
 		construirCadastro();
 	}
-	
+	/**
+	 * construção dos elementos do painel do pet
+	 */
 	public void construirCadastro() {
 		botaoConfirmar();
 		nomeAnimal();
@@ -100,7 +113,9 @@ public class TelaCriarPet implements ActionListener {
 		porte();
 		labelAdicionarPet();
 	}
-	
+	/**
+	 * label com o texto de adicionar pet
+	 */
 	public void labelAdicionarPet() {
 		JLabel meusPets = new JLabel("Adicionar pet");
 		meusPets.setBounds(170, 0, 250, 150);
@@ -108,7 +123,9 @@ public class TelaCriarPet implements ActionListener {
 		meusPets.setForeground(Color.BLACK);
 		painel.add(meusPets);
 	}
-	
+	/*
+	 * método com a adição do nome do animal
+	 */
 	public void nomeAnimal() {
 		painel.setLayout(null);
 		JLabel nomeAnimal = new JLabel("Nome:");
@@ -120,8 +137,11 @@ public class TelaCriarPet implements ActionListener {
 		textNome.setBounds(220, 120, 200, 20);
 		painel.add(textNome);
 		
-	}
+	}	
 	
+	/*
+	 * método com a adição do nome da esoécie
+	 */
 	public void especie() {
 		painel.setLayout(null);
 		JLabel especie = new JLabel("Especie:");
@@ -134,6 +154,9 @@ public class TelaCriarPet implements ActionListener {
 		boxEspecie.setBounds(220, 162, 200, 20);
 		painel.add(boxEspecie);
 	}
+	/*
+	 * método com a adição da raça
+	 */
 
 	public void raca() {
 		painel.setLayout(null);
@@ -147,7 +170,9 @@ public class TelaCriarPet implements ActionListener {
 		painel.add(textRaca);
 		
 	}
-	
+	/*
+	 * método com a adição do nome do genero
+	 */
 	public void genero() {
 		painel.setLayout(null);
 		JLabel genero = new JLabel("Genero:");
@@ -161,7 +186,9 @@ public class TelaCriarPet implements ActionListener {
 		painel.add(boxGeneros);
 		
 	}
-	
+	/*
+	 * método com a adição do nome da idade
+	 */
 	public void idade() {
 		painel.setLayout(null);
 		JLabel idade = new JLabel("Idade:");
@@ -174,6 +201,9 @@ public class TelaCriarPet implements ActionListener {
 		painel.add(textIdade);
 		
 	}
+	/*
+	 * método com a adição do nome do porte
+	 */
 	
 	public void porte() {
 		painel.setLayout(null);
@@ -188,7 +218,9 @@ public class TelaCriarPet implements ActionListener {
 		painel.add(boxPorte);
 		
 	}
-	
+	/*
+	 * botao confirmar
+	 */
 	public void botaoConfirmar() {
 		JButton botao = new JButton("Confirmar");
 		botao.setBounds(230, 380, 100, 40);
@@ -198,6 +230,9 @@ public class TelaCriarPet implements ActionListener {
 		
 	}
 	
+	/*
+	 * método responsável pela adição dos dados escitos em um animal
+	 */
 	public void dadosAnimal(JTextField textNome, JComboBox<String> boxEspecie, JTextField textRaca, JComboBox<String> boxGeneros, JTextField textIdade, JComboBox<String> boxPorte) {
 		String nome = textNome.getText();
 		

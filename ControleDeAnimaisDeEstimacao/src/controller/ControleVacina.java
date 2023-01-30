@@ -9,15 +9,40 @@ import view.TelaVacina;
 public class ControleVacina {
 	private ControleDados dados;
 	
+	/**
+	 * classe responsavel pelo gerenciamento de vacinas
+	 * @param dados
+	 */
 	public ControleVacina(ControleDados dados) {
 		this.dados = dados;
 	}
-	
+	/**
+	 * método responsável por relacionar uma vacina a um animal
+	 * 
+	 * @param i
+	 * @param nroDosagem
+	 * @param dosagem
+	 * @param frequencia
+	 * @param dataFinal
+	 * @param qtdVezes
+	 * @param nomeMedicamento
+	 * @param data
+	 */
 	 public void adicionarVacnina(int i, String lote, String laboratorio, boolean necRevacinar, String nomeMedicamento, String data, int periodo, Intervalo intervalo, String anotacoes) {
-	    	Vacina vacina = new Vacina(lote, laboratorio, necRevacinar, nomeMedicamento, data, periodo, intervalo, anotacoes);
-	    	dados.getAnimais().get(i).cadastrarVacina(vacina);
-	    }
-	
+    	Vacina vacina = new Vacina(lote, laboratorio, necRevacinar, nomeMedicamento, data, periodo, intervalo, anotacoes);
+    	dados.getAnimais().get(i).getVacinas().add(vacina);
+    }
+	    /**
+	     * método responsável pela edição de uma Vacina
+	     * @param i
+	     * @param nroDosagem1
+	     * @param dosagem1
+	     * @param frequencia1
+	     * @param dataFinal1
+	     * @param qtdVezes1
+	     * @param nomeMedicamento1
+	     * @param data1
+	     */
     public void editarVacina(int i, String lote1, String laboratorio1, boolean necRevacinar1, String nomeMedicamento1, String data1, int periodo1, Intervalo intervalo1, String anotacoes1){
     	for (int j = 0; j < dados.getAnimais().get(i).getVacinas().size(); j++) {
 			if(dados.getAnimais().get(i).getVacinas().get(j).getNomeMedicamento() != null) {
@@ -32,7 +57,12 @@ public class ControleVacina {
 			}
 		}
 	}
-    	
+    /**
+     * método responsável por apagar uma vacina
+     * 
+     * @param nome
+     * @param i
+     */	
     
 	public void excluirVacina(String nome, int i) {
 		for (int j = 0; j < dados.getAnimais().get(i).getVacinas().size(); j++) {
@@ -41,16 +71,25 @@ public class ControleVacina {
 			}
 		}
 	}
-	
-    public DefaultListModel<String> getNomeVacina() {
+	/**
+	 * método responsável pela geração de uma lista com o nome de vacina
+	 * 
+	 * @return
+	 */
+    public DefaultListModel<String> getNomeVacina(int i) {
     	DefaultListModel<String> listaNomesVacinas = new DefaultListModel<String>();
-    	for (int i = 0; i < dados.getQtdVacinas(); i++) {
-    		String nome = dados.getVacinas().get(i).getNomeMedicamento();
-    		listaNomesVacinas.add(i, nome);
+    	for (int j = 0; j < dados.getAnimais().get(i).getVacinas().size(); j++) {
+    		String nome = dados.getAnimais().get(i).getVacinas().get(j).getNomeMedicamento();
+    		listaNomesVacinas.add(j, nome);
     	}
     	return listaNomesVacinas;
     }
-	
+    /**
+     * método responsável pela leitura de uma vacina
+     * 
+     * @param nome
+     * @param i
+     */
 	public void verVacina(String nome, int i) {
 		for (int j = 0; j < dados.getAnimais().get(i).getVacinas().size(); j++) {
 			if(dados.getAnimais().get(i).getVacinas().get(j).getNomeMedicamento().equals(nome)) {

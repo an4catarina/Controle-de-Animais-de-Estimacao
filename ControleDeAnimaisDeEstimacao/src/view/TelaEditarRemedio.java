@@ -28,7 +28,11 @@ import controller.ControleDados;
 import controller.ControleRemedio;
 import enumerate.Dosagem;
 import enumerate.Frequencia;
-
+/**
+ * tela de edição do remédio
+ * @author catarina
+ *
+ */
 public class TelaEditarRemedio implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;

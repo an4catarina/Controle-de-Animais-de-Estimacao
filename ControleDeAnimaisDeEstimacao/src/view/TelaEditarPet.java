@@ -27,7 +27,11 @@ import enumerate.Especie;
 import enumerate.Genero;
 import enumerate.Porte;
 
-
+/**
+ * tela de edição do pet
+ * @author catarina
+ *
+ */
 public class TelaEditarPet implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;

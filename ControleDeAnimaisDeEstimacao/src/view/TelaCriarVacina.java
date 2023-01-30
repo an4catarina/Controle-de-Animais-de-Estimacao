@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -31,6 +32,11 @@ import controller.ControleDados;
 import controller.ControleVacina;
 import enumerate.Intervalo;
 
+/**
+ * tela responsável pela criação de vacina
+ * @author catarina
+ *
+ */
 public class TelaCriarVacina implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;
@@ -293,7 +299,7 @@ public class TelaCriarVacina implements ActionListener {
 		}
 		if ("Confirmar" == e.getActionCommand()) {
 			 dadosVacina(textNome, textData, textLaboratorio, textLote, sim, nao, intIntervalo, boxIntervalo, textAnotacoes);
-			 new TelaPerfilPet(dados, i);
+			 new TelaListaPets(dados);
 			 JOptionPane.showMessageDialog(null, "Vacina cadastrada com sucesso!");
 	         frame.dispose();
 		} 

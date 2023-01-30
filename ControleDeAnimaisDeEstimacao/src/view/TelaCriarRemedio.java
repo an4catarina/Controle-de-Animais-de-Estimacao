@@ -30,6 +30,11 @@ import controller.ControleRemedio;
 import enumerate.Dosagem;
 import enumerate.Frequencia;
 
+/**
+ * tela responsável pela criação de remédio
+ * @author catarina
+ *
+ */
 public class TelaCriarRemedio implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;
@@ -261,10 +266,6 @@ public class TelaCriarRemedio implements ActionListener {
 		
 		controleRemedio.adicionarRemedio(i, nroDosagem , dosagem, frequencia, dataF, qtdVezes, nomeMedicamento, dataI);
 	}
-	
-	public static void main(String[] args) {
-		new Inicio();
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -274,7 +275,7 @@ public class TelaCriarRemedio implements ActionListener {
 		}
 		if ("Confirmar" == e.getActionCommand()) {
 			 dadosRemedio(textNome, textDosagem, boxDosagem, boxFrequencia, dataInicio, dataFinal, num, textAnotacoes);
-			 new TelaPerfilPet(dados, i);
+			 new TelaListaPets(dados);
 			 JOptionPane.showMessageDialog(null, "Remédio cadastrado com sucesso!");
 	         frame.dispose();
 		}		

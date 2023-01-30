@@ -15,7 +15,12 @@ import javax.swing.JLabel;
 
 import controller.ControleDados;
 
-
+/**
+ * tela de início
+ * 
+ * @author catarina
+ *
+ */
 public class Inicio implements ActionListener {
 	private JFrame frame;
 	private ControleDados dados = new ControleDados();
@@ -65,7 +70,7 @@ public class Inicio implements ActionListener {
 
 	public void implementarBotao() {
 		JButton botao = new JButton("Começar");
-		botao.setBounds(270, 500, 100, 40);
+		botao.setBounds(260, 500, 100, 40);
 		botao.setActionCommand("começar");
 		botao.addActionListener(this);
 		frame.add(botao);

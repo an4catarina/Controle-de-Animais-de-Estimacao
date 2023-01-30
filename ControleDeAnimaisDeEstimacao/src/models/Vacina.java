@@ -2,6 +2,13 @@ package models;
 
 import enumerate.Intervalo;
 
+/**
+ * classe que armazena informações de vacinas, herda de {@link models.Medicamento};
+ *
+ * @author catarina
+ *
+ */
+
 public class Vacina extends Medicamento {
 	private String lote;
 	private String laboratorio;

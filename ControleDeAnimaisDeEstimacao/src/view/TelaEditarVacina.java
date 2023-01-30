@@ -31,6 +31,9 @@ import controller.ControleDados;
 import controller.ControleVacina;
 import enumerate.Intervalo;
 
+/**
+ * tela de edição de vacina
+ */
 public class TelaEditarVacina implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;

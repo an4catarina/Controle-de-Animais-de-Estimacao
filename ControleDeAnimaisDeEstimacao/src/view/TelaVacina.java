@@ -23,6 +23,11 @@ import controller.ControleDados;
 import controller.ControleVacina;
 import enumerate.Intervalo;
 
+/**
+ * tela responsável pelos dados da vacina
+ * @author catarina
+ *
+ */
 public class TelaVacina implements ActionListener {
 	private JFrame frame;
 	private JPanel painel;

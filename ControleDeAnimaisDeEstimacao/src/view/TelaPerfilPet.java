@@ -270,8 +270,7 @@ public class TelaPerfilPet implements ActionListener, ListSelectionListener {
 	
 	public void listaVacinas() {
 		listaVacinas = new JList<String>();
-		listaVacinas.setModel(controleVacina.getNomeVacina());
-		listaVacinas.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		listaVacinas.setModel(controleVacina.getNomeVacina(i));
 		listaVacinas.setBounds(10, 50, 250, 170);
 		painelVacinas.add(listaVacinas);
 		listaVacinas.addListSelectionListener(this);
@@ -314,7 +313,7 @@ public class TelaPerfilPet implements ActionListener, ListSelectionListener {
 	
 	public void listaRemedios() {
 		listaRemedios = new JList<String>();
-		listaRemedios.setModel(controleRemedio.getNomeRemedio());
+		listaRemedios.setModel(controleRemedio.getNomeRemedio(i));
 		listaRemedios.setBounds(10, 50, 250, 170);
 		painelRemedios.add(listaRemedios);
 		listaRemedios.addListSelectionListener(this);

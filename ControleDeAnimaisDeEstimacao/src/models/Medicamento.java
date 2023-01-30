@@ -2,6 +2,13 @@ package models;
 
 import enumerate.Intervalo;
 
+/**
+ * classe abstrata na qual amarzena os dados de medicamentos;
+ * 
+ * @author catarina
+ *
+ */
+
 public abstract class Medicamento {
 	private String nomeMedicamento;
 	private String data;

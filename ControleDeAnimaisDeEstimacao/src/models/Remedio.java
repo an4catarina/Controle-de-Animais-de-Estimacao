@@ -3,6 +3,13 @@ package models;
 import enumerate.Dosagem;
 import enumerate.Frequencia;
 
+/**
+ *  classe que armazena informações de remedios, herda de {@link models.Medicamento};
+ * 
+ * @author catarina
+ *
+ */
+
 public class Remedio extends Medicamento {
 	private int nroDosagem;
 	private Dosagem dosagem;
